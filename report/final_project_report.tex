@@ -1,0 +1,231 @@
+%------------------------------------------------------------
+% DEFINITIONS AND HEADERS -- IGNORE THIS
+%------------------------------------------------------------
+\documentclass{article}
+\usepackage[top=2.0cm, bottom=3cm, left=2.5cm, right=2.25cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{algpseudocode}
+% Get better typography
+\usepackage[protrusion=true]{microtype}
+% For algorithms
+\usepackage[boxruled,linesnumbered,vlined,inoutnumbered]{algorithm2e}
+\SetKwInOut{Parameter}{Parameters}
+% For basic math, align, fonts, etc.
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{rotating}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{soul}
+\usepackage{changepage}
+\usepackage{gensymb} % For \degree
+\usepackage{lscape}
+% For \thead to make line breaks in tables
+\usepackage{array}
+\usepackage{makecell}
+\renewcommand\theadalign{bc}
+\renewcommand\theadfont{\bfseries}
+\renewcommand\theadgape{\Gape[4pt]}
+\renewcommand\cellgape{\Gape[4pt]}
+\usepackage{courier} % For \texttt{foo} to put foo in Courier (for code / variables)
+\usepackage{lipsum} % For dummy text
+% For images
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[space]{grffile} % For spaces in image names
+% For bibliography
+\usepackage[round]{natbib}
+% For color
+\usepackage{xcolor}
+\definecolor{light-grey}{rgb}{0.9,0.9,0.9}
+\definecolor{dark-red}{rgb}{0.4,0.15,0.15}
+\definecolor{dark-blue}{rgb}{0,0,0.7}
+\definecolor{darkblue}{rgb}{0,0,.6}
+\definecolor{darkred}{rgb}{.58,0,0}
+\definecolor{brighterred}{rgb}{.745,0,0}
+\definecolor{darkgreen}{rgb}{0,.6,0}
+\definecolor{red}{rgb}{.98,0,0}
+\usepackage{environ}
+% Only show sections in table of contents and rename
+\setcounter{tocdepth}{2}
+\renewcommand{\contentsname}{Table of Contents}
+% For links (e.g., clicking a reference takes you to the phy)
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks, linkcolor={dark-blue},
+    citecolor={dark-blue}, urlcolor={dark-blue}
+}
+\newcommand{\TODO}[1]{\textcolor{blue}{\textbf{{#1}}}}
+\newcommand{\POINTS}[1]{\textcolor{purple}{\textbf{{#1}}}}
+\providecommand{\mathcolor}[2]{\textcolor{#1}{#2}}
+% My definition of "summary boxes" (see below)
+\usepackage[most]{tcolorbox}
+\definecolor{boxgray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{boxblue}{rgb}{0.941, 0.941, 0.98}
+\definecolor{boxpink}{rgb}{1.0, 0.93, 0.93}
+\definecolor{boxwhite}{rgb}{1.0, 1.0, 1.0}
+%\definecolor{boxgreen}{rgb}{0.91, 0.96, 0.9}
+\definecolor{boxgreen}{rgb}{0.92, 0.96, 0.92}
+\newtcolorbox{mybox}[1][boxwhite]{%
+  enhanced,
+  boxrule=0.5pt,
+  colframe=black,
+  colback=#1,
+  sharp corners,
+  width=\linewidth,
+  left=1em,
+  right=1em,
+  top=0.5em,
+  bottom=0.5em,
+  boxsep=0pt,
+  before skip=1em,
+  after skip=0.85em,
+}
+%------------------------------------------------------------
+
+
+
+
+
+
+
+
+\begin{document}
+%-----------------
+%	Homework 5
+%-----------------
+\newpage
+\vspace*{1cm}
+\begin{center}
+    \begin{Large}
+    COMPSCI 687 - Final Project - Fall 2025
+    \end{Large}
+    \\
+    \vspace{0.15cm}
+    Due \textcolor{darkred}{\textbf{December 9}}, 11:55pm Eastern Time
+\end{center}
+\addcontentsline{toc}{subsection}{\textbf{Homework 5}}
+
+
+
+% \vspace{1.0cm}
+% \section{Instructions}
+
+% \begin{itemize}
+%     \item This homework consists only of a programming part.
+%     \item While you may discuss problems with your peers (e.g., to discuss high-level approaches), you must answer the questions on your own. In your submission, do explicitly list all students with whom you discussed this assignment. 
+%     \item Submissions must be typed. You must use \LaTeX. Handwritten and scanned submissions will not be accepted. 
+%     \item The assignment should be submitted on Gradescope as a PDF with marked answers via the Gradescope interface. The source code should be submitted via the Gradescope programming assignment as a .zip file. Include with your source code instructions for how to run your code. You \textbf{must} use Python 3 for your homework code. 
+%     \item You may \underline{not} use any reinforcement learning or machine learning specific libraries in your code, e.g., TensorFlow, PyTorch, or scikit-learn. You \textit{may} use libraries like numpy and matplotlib, though.
+%     \begin{itemize}
+%     \item You must write your own code from scratch. 
+%     \item \textbf{The only exception is that you may re-use code you wrote for previous homework assignments. }
+%     \item \textcolor{darkred}{We will use an automated system to detect plagiarism.} Your code will be compared against submissions from your classmates as well as publicly available implementations online.
+%     \end{itemize}
+%     \item The automated system will not accept assignments after 11:55pm on December 1. 
+%     \item The .tex file for this homework can be found on Canvas under ``\textit{Homework \#5 - Supporting Files}''. 
+% \end{itemize}
+
+
+
+
+
+%------------------------------------------------------------------------
+%  PROGRAMMING / CODING SECTION
+%------------------------------------------------------------------------
+% \newpage
+
+
+
+%---- Intro and Problem Specification ----------------------    
+% \vspace*{-0.75cm}
+% \section*{Programming Assignment \POINTS{[100 Points, total]}}
+\section*{Option 1}
+% \vspace{0.25cm}
+
+\looseness-1
+Select a problem in your field that can be modeled as an MDP. Describe the problem, explain how it fits the MDP formulation (i.e., formally define all components of the corresponding Markov Decision Process), discuss the techniques that are currently used to solve it, and then apply three existing RL methods to the problem.
+
+\vspace{0.5\baselineskip}
+
+\noindent For this project, the main contribution will be the new environment, so you are not allowed to use any code from existing RL domains. You may, however, use existing RL algorithm implementations, such as those in OpenAI Gym or Stable Baselines3.
+
+% \begin{mybox}[boxpink] 
+% \textbf{Notice that you may \underline{not} use existing RL code for this problem. You must implement the agent and environment entirely on your own and from scratch.} 
+% \end{mybox}
+
+% \vspace{0.15in}
+% \begin{mybox}[boxblue] 
+% \textbf{General instructions:}
+% \begin{itemize}
+%     \item You are free to initialize the $q$-function in any way that you want. More details about this later. 
+%     \item Whenever displaying values (e.g., the value of a state), use 4 decimal places; e.g, $v(s)=9.4312$.
+%     \item Whenever showing the value function and policy learned by your algorithm, present them in a format resembling that depicted in Figure \ref{fig:v_pi_star_cat_monsters}.
+% \end{itemize}
+% \end{mybox}
+
+% \begin{figure}[!!hb]
+%     \centering
+%     \includegraphics[width=0.5\textwidth]{HW_figs/v_pi_star_cat_monsters.pdf}
+%     \caption{Optimal value function and optimal policy for the Cat-vs-Monsters domain.}
+%     \label{fig:v_pi_star_cat_monsters}
+% \end{figure}
+
+% \vspace{0.7cm}
+
+
+
+
+
+
+%---- Question 1 ----------------------
+
+% \noindent {\Large{\textbf{1.} \textbf{TD-Learning in the Cat-vs-Monsters domain} \POINTS{[20 Points, total]}}}
+% \vspace{0.4cm}
+    
+% \noindent First, implement the TD-Learning algorithm for policy evaluation and use it to learn an estimate, $\hat{v}$, of the value function of the optimal policy, $\pi^*$, for the Cat-vs-Monsters domain. \textbf{Remember that both the optimal value function and the optimal policy for the Cat-vs-Monsters domain were identified in a previous homework using the Value Iteration algorithm. For reference, both are shown in Figure \ref{fig:v_pi_star_cat_monsters}.} When sampling trajectories, set $d_0$ to be a uniform distribution over $\mathcal{S}$ to ensure that you are collecting returns from all states. Do not allow the agent to be initialized in a Forbidden Furniture location. Note that using this alternative definition of $d_0$ (instead of the original one) is important because we want to generate trajectories from all states in the MDP, not just those visited under the optimal deterministic policy shown in Figure \ref{fig:v_pi_star_cat_monsters}.
+% \vspace{0.2cm}
+    
+% \noindent You should run your algorithm until the value function estimate does not change significantly between successive iterations; i.e., whenever the Max-Norm between $\hat{v}_{t-1}$ and $\hat{v}_t$ is at most $\delta$, for some value of $\delta$ that you should set empirically. For each run of your algorithm, count how many episodes were necessary for it to converge to an estimate of $v^{*}$. Run your algorithm, as described above, 50 times, and then:
+
+% \newpage
+\begin{itemize}
+
+
+        %---- Question 1a ----------------------
+        \item \textbf{Question (i).} Report how you implemented the domain (e.g., your choice of programming language and details about how you implemented each component of the MDP);
+        \vspace{0.2cm}
+        %
+        % YOUR RESPONSE HERE
+        %
+
+
+
+        %---- Question 1b ----------------------
+        \item \textbf{Question (ii).} Describe any assumptions you had to make in order to model the original problem as a Markov Decision Process; and
+        \vspace{0.2cm}
+        %
+        % YOUR RESPONSE HERE
+        %
+
+
+
+        %---- Question 1c ----------------------
+        \item \textbf{Question (iii).} Report how well the RL algorithms performed, including how hyperparameters were optimized. When analyzing performance, you should present learning curves similar to those in the homework assignments.
+        \vspace{0.2cm}
+        %
+        % YOUR RESPONSE HERE
+        %
+        
+\end{itemize}
+    
+
+        
+\end{document}
+
+
+
+    
