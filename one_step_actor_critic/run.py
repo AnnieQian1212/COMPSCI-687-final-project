@@ -20,9 +20,9 @@ def run_blackjack():
     agent = OneStepActorCritic(
         num_actions=env.num_actions,
         state_dim=3,
-        alpha_theta=0.01,
-        alpha_w=0.01,
-        gamma=1.0,
+        alpha_theta=0.0001,
+        alpha_w=0.001,
+        gamma=0.99,
         order=2,
         state_bounds=state_bounds
     )
@@ -51,7 +51,7 @@ def run_cartpole():
         state_bounds=state_bounds
     )
     
-    rewards = train(env, agent, num_episodes=2000)
+    rewards = train(env, agent, num_episodes=5000)
     env.close()
     return rewards
 
@@ -80,7 +80,7 @@ def plot_results(rewards_dict, window=100):
 if __name__ == '__main__':
     results = {}
 
-    results['CartPole'] = run_cartpole()
+    # results['CartPole'] = run_cartpole()
     results['Blackjack'] = run_blackjack()
     
     plot_results(results)
