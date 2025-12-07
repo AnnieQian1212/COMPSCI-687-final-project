@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.8)  7 DEC 2025 01:26
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.8)  7 DEC 2025 01:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -958,14 +958,14 @@ File: report_fig/blackjack.png Graphic file (type bmp)
  [7]
 File: report_fig/blackjack_tuning.png Graphic file (type bmp)
 <report_fig/blackjack_tuning.png>
+ [8]
 File: report_fig/frozen_lake.png Graphic file (type bmp)
 <report_fig/frozen_lake.png>
- [8]
 File: report_fig/frozenlake_tuning.png Graphic file (type bmp)
 <report_fig/frozenlake_tuning.png>
+ [9]
 File: report_fig/taxi.png Graphic file (type bmp)
 <report_fig/taxi.png>
- [9]
 File: report_fig/taxi_tuning.png Graphic file (type bmp)
 <report_fig/taxi_tuning.png>
  [10] [11] (./final_project_report.aux)

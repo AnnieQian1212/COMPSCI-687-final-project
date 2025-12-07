@@ -291,7 +291,7 @@ After the updates, the discounting variable is updated as $I \leftarrow \gamma I
 We systematically tuned hyperparameters for four environments (CartPole, Blackjack, FrozenLake, and Taxi). For each environment, we tested different combinations of learning rates for the actor ($\alpha_\theta$) and critic ($\alpha_w$), feature representations (Polynomial, Fourier, Tile Coding, RBF, and Coarse Coding), and feature complexity (such as polynomial order, number of tilings, or number of centers).  
 Each environment was evaluated under four configurations. We analyzed final performance and the stability of the temporal-difference (TD) error.
 
-\subsubsection{CartPole}
+\subsubsection{Cart Pole}
 
 \paragraph{Configurations Tested}
 \begin{center}
@@ -339,7 +339,7 @@ All configurations showed high variance due to stochastic card draws and sparse 
 \paragraph{Analysis}
 A second-order polynomial provided enough capacity to model interactions between player sum, dealer card, and usable ace without overfitting. Increasing polynomial order destabilized learning because the number of parameters grew too large for the small discrete state space. Tile coding performed poorly because it re-discretized already discrete variables, which led to information loss.   
 
-\subsubsection{FrozenLake}
+\subsubsection{Frozen Lake}
 
 \paragraph{Configurations Tested}
 \begin{center}
@@ -401,7 +401,7 @@ TD error behavior was a reliable indicator of learning health. Decreasing varian
 
 This section reports the experimental outcomes obtained with the tuned hyperparameters and feature representations for each environment. The results are summarized in terms of final average reward and TD error trends.
 
-\subsubsection{CartPole}
+\subsubsection{Cart Pole}
 
 \begin{figure}[H]
     \centering
@@ -409,7 +409,7 @@ This section reports the experimental outcomes obtained with the tuned hyperpara
     \caption{The visualization of Cart Pole environment.}
 \end{figure}
 
-Using Fourier and RBF feature representations, the one-step actor--critic algorithm consistently achieved the maximum reward of 500. Fourier features converged faster, reaching the optimal performance within approximately 500 episodes, whereas RBF features required around 800 episodes. In contrast, polynomial feature representations of order 2 and 3 failed to converge, with final rewards remaining below 30.
+Using Fourier and RBF feature representations, the one-step actor--critic algorithm consistently achieved the maximum reward of 500. Fourier features converged faster, reaching the optimal performance within 1 episode, whereas RBF features required around 700 episodes. In contrast, polynomial feature representations of order 2 and 3 failed to converge, with final rewards remaining below 30.
 
 \begin{figure}[H]
     \centering
@@ -437,7 +437,9 @@ In the Blackjack environment, all configurations showed high variance due to sto
 
 Higher-order polynomial features and tile coding resulted in negative average rewards. TD errors remained noisy across all configurations, typically within the range $\pm 0.1$ to $\pm 0.2$, even after extended training. Despite the variance, the TD errors in the best configuration were centered around zero, indicating an unbiased but noisy value estimate.
 
-\subsubsection{FrozenLake}
+We think this one-step actor-critic algorithm is not very suitable for the Blackjack environment, as the high variance in rewards and sparse feedback make it difficult for the critic to learn accurate value estimates. This leads to unstable policy updates by the actor, resulting in suboptimal performance.
+
+\subsubsection{Frozen Lake}
 
 \begin{figure}[H]
     \centering
