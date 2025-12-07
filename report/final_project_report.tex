@@ -4,7 +4,9 @@
 \documentclass{article}
 \usepackage[top=2.0cm, bottom=3cm, left=2.5cm, right=2.25cm]{geometry}
 \usepackage[utf8]{inputenc}
-\usepackage{algpseudocode}
+\usepackage[most]{tcolorbox}
+\usepackage{fullpage}
+\usepackage{bm}
 % Get better typography
 \usepackage[protrusion=true]{microtype}
 % For algorithms
@@ -13,6 +15,7 @@
 % For basic math, align, fonts, etc.
 \usepackage{amsmath}
 \usepackage{amsthm}
+\usepackage{float}
 \usepackage{amssymb}
 \usepackage{mathtools}
 \usepackage{mathrsfs}
@@ -101,7 +104,7 @@
     \end{Large}
     \\
     \vspace{0.15cm}
-    Due \textcolor{darkred}{\textbf{December 9}}, 11:55pm Eastern Time
+    Aichen Qian, Linfeng Lyu, Wanqi Wang
 \end{center}
 \addcontentsline{toc}{subsection}{\textbf{Homework 5}}
 
@@ -139,71 +142,344 @@
 %---- Intro and Problem Specification ----------------------    
 % \vspace*{-0.75cm}
 % \section*{Programming Assignment \POINTS{[100 Points, total]}}
-\section*{Option 1}
+\section*{\underline{\textbf{Option 2.}}}
 % \vspace{0.25cm}
 
 \looseness-1
-Select a problem in your field that can be modeled as an MDP. Describe the problem, explain how it fits the MDP formulation (i.e., formally define all components of the corresponding Markov Decision Process), discuss the techniques that are currently used to solve it, and then apply three existing RL methods to the problem.
+Select \underline{\textbf{two}} RL algorithms that were not covered in class and evaluate each of them on at least \underline{\textbf{two}} existing
+MDPs/domains. Since the point of this project is to implement these methods from scratch, you should not use
+existing code for the RL algorithms—though you may use existing code for the environments that you test.
+
 
 \vspace{0.5\baselineskip}
 
-\noindent For this project, the main contribution will be the new environment, so you are not allowed to use any code from existing RL domains. You may, however, use existing RL algorithm implementations, such as those in OpenAI Gym or Stable Baselines3.
+\noindent Examples of algorithms that we have not covered in class that could be a good fit are the REINFORCE with
+Baseline algorithm (Section 13.4 of the RL book), the One-Step Actor-Critic algorithm for episodic tasks
+(Section 13.5 of the RL book), a model-based RL algorithm such as Prioritized Sweeping (Section 8.4 of the
+RL book), the Monte Carlo Tree Search (MCTS) algorithm (Section 8.11 of the RL book), the Episodic
+Semi-Gradient n-step SARSA algorithm (Section 10.2 of the RL book), the True Online SARSA($\lambda$) algorithm
+(Section 12.7 of the RL book), and the PI$^2$
+-CMA-ES algorithm from the paper \textit{Path Integral Policy Improvement
+with Covariance Matrix Adaptation}.
 
-% \begin{mybox}[boxpink] 
-% \textbf{Notice that you may \underline{not} use existing RL code for this problem. You must implement the agent and environment entirely on your own and from scratch.} 
-% \end{mybox}
+\vspace{0.5\baselineskip}
 
-% \vspace{0.15in}
-% \begin{mybox}[boxblue] 
-% \textbf{General instructions:}
-% \begin{itemize}
-%     \item You are free to initialize the $q$-function in any way that you want. More details about this later. 
-%     \item Whenever displaying values (e.g., the value of a state), use 4 decimal places; e.g, $v(s)=9.4312$.
-%     \item Whenever showing the value function and policy learned by your algorithm, present them in a format resembling that depicted in Figure \ref{fig:v_pi_star_cat_monsters}.
-% \end{itemize}
-% \end{mybox}
+\noindent If you decide to implement an algorithm that is not listed above, please check with the instructor and/or TAs
+to make sure it is appropriate for this course project.
 
-% \begin{figure}[!!hb]
-%     \centering
-%     \includegraphics[width=0.5\textwidth]{HW_figs/v_pi_star_cat_monsters.pdf}
-%     \caption{Optimal value function and optimal policy for the Cat-vs-Monsters domain.}
-%     \label{fig:v_pi_star_cat_monsters}
-% \end{figure}
+\vspace{0.5\baselineskip}
 
-% \vspace{0.7cm}
+\noindent In the write-up for this type of project, you should include:
 
-
-
-
-
-
-%---- Question 1 ----------------------
-
-% \noindent {\Large{\textbf{1.} \textbf{TD-Learning in the Cat-vs-Monsters domain} \POINTS{[20 Points, total]}}}
-% \vspace{0.4cm}
-    
-% \noindent First, implement the TD-Learning algorithm for policy evaluation and use it to learn an estimate, $\hat{v}$, of the value function of the optimal policy, $\pi^*$, for the Cat-vs-Monsters domain. \textbf{Remember that both the optimal value function and the optimal policy for the Cat-vs-Monsters domain were identified in a previous homework using the Value Iteration algorithm. For reference, both are shown in Figure \ref{fig:v_pi_star_cat_monsters}.} When sampling trajectories, set $d_0$ to be a uniform distribution over $\mathcal{S}$ to ensure that you are collecting returns from all states. Do not allow the agent to be initialized in a Forbidden Furniture location. Note that using this alternative definition of $d_0$ (instead of the original one) is important because we want to generate trajectories from all states in the MDP, not just those visited under the optimal deterministic policy shown in Figure \ref{fig:v_pi_star_cat_monsters}.
-% \vspace{0.2cm}
-    
-% \noindent You should run your algorithm until the value function estimate does not change significantly between successive iterations; i.e., whenever the Max-Norm between $\hat{v}_{t-1}$ and $\hat{v}_t$ is at most $\delta$, for some value of $\delta$ that you should set empirically. For each run of your algorithm, count how many episodes were necessary for it to converge to an estimate of $v^{*}$. Run your algorithm, as described above, 50 times, and then:
-
-% \newpage
 \begin{itemize}
 
         %---- Question 1a ----------------------
-        \item \textbf{Question (i).} Report how you implemented the domain (e.g., your choice of programming language and details about how you implemented each component of the MDP);
-        \vspace{0.2cm}
+        \item \textbf{(i)} A brief description of the methods and what they do;
+        % \vspace{0.2cm}
 
         %---- Question 1b ----------------------
-        \item \textbf{Question (ii).} Describe any assumptions you had to make in order to model the original problem as a Markov Decision Process; and
-        \vspace{0.2cm}
+        \item \textbf{(ii)} Pseudocode for the methods;
+        % \vspace{0.2cm}
 
         %---- Question 1c ----------------------
-        \item \textbf{Question (iii).} Report how well the RL algorithms performed, including how hyperparameters were optimized. When analyzing performance, you should present learning curves similar to those in the homework assignments.
-        \vspace{0.2cm}
-        
+        \item \textbf{(iii)} A discussion of how you tuned their hyperparameters; and
+        % \vspace{0.2cm}
+        \item \textbf{(iv)} The corresponding experimental results. When analyzing the performance of each algorithm, you should present learning curves similar to those in the homework assignments.
 \end{itemize}
 
+\section*{\underline{\textbf{Extra Credit}}}
+\begin{itemize}
+
+        %---- Question 1a ----------------------
+        \item \textbf{(i)} In case you chose to implement new RL algorithms, you might be planning to evaluate them in the toy domains introduced in class: the 687-GridWorld domain, the Cat-vs-Monsters domain, and the Mountain Car domain. One way to earn extra credit would be to implement other classic RL benchmark problems, such as Acrobot, Inverted Pendulum Swing-Up, or the Cartpole domain.
+        % \vspace{0.2cm}
+
+        %---- Question 1b ----------------------
+        \item \textbf{(ii)} You may choose to implement a \textit{third} RL algorithm, as long as it is not a trivial modification or extension of one of the other algorithms you are implementing.
+\end{itemize}
+
+\section{REINFORCE with Baseline algorithm}
+\subsection{Brief Description}
+\subsection{Pseudocode}
+\subsection{Hyperparameter Tuning}
+\subsection{Experimental Results}
+
+\section{One-Step Actor-Critic algorithm}
+\subsection{Brief Description}
+
+\paragraph{One-step Actor-Critic Algorithm.}
+The One-step Actor-Critic algorithm is an on-policy reinforcement learning method that jointly learns a policy and a state-value function. The policy $\pi(a | s, \bm{\theta})$, called the actor, is a differentiable function parameterized by $\bm{\theta}$ and defines a probability distribution over actions given a state. The state-value function $\hat v(s,\bm{w})$, called the critic, is also differentiable and is parameterized by $\bm{w}$, estimating the expected discounted return from a state under the current policy. The algorithm uses separate step sizes $\alpha^{\bm{\theta}}$ and $\alpha^{\bm{w}}$ for updating the actor and the critic, respectively.
+
+\paragraph{Episode Initialization.}
+At the beginning of each episode, the environment is reset to obtain the initial state $S$. The auxiliary variable $I$ is initialized to $1$ and is used to apply discounting in the policy gradient update. The parameters $\bm{\theta}$ and $\bm{w}$ are initialized before training, typically to zero or small random values.
+
+\paragraph{Interaction and TD Error.}
+At each time step, while the current state $S$ is not terminal, an action $A$ is sampled from the current policy $\pi(\cdot | S, \bm{\theta})$. After executing the action, the agent observes a reward $R$ and the next state $S'$. The temporal-difference (TD) error is then computed as
+\[
+\delta = R + \gamma \hat v(S', \bm{w}) - \hat v(S, \bm{w})
+\]
+where $\gamma$ is the discount factor. If the next state $S'$ is terminal, the value estimate $\hat v(S', \bm{w})$ is set to zero. The TD error measures the difference between the observed return and the current value estimate.
+
+\paragraph{Critic Update.}
+The critic updates the value-function parameters using one-step TD learning:
+\[
+\bm{w} \leftarrow \bm{w} + \alpha^{\bm{w}} \, \delta \, \nabla \hat v(S, \bm{w})
+\]
+This update reduces the prediction error of the value function by moving $\hat v(S,\bm{w})$ toward the one-step bootstrapped target.
+
+\paragraph{Actor Update.}
+The actor updates the policy parameters using a policy gradient step:
+\[
+\bm{\theta} \leftarrow \bm{\theta} + \alpha^{\bm{\theta}} \, I \, \delta \, \nabla \ln \pi(A | S, \bm{\theta})
+\]
+We also have
+\[\nabla \ln \pi(a | s, \bm{\theta}) = \frac{\nabla \pi(a | s, \bm{\theta})}{\pi(a | s, \bm{\theta})} = \text{\textbf{x}}(s,a) - \sum_{b} \pi(b | s, \bm{\theta}) \text{\textbf{x}}(s,b)\]
+where $\text{\textbf{x}}(s,a)$ is the feature vector for state-action pair $(s,a)$. 
+
+\subparagraph{Polynomial Feature.}
+Polynomial features represent the state by using polynomial terms of the original state variables. Given a state vector $s = (s_1, s_2, \dots, s_d)$, the feature vector may include constant terms, single variables, squared or higher-order terms, and cross-products such as $s_i s_j$. This allows a linear function approximator to model nonlinear relations between the state and the value or policy. However, the number of features grows quickly as the polynomial degree or the state dimension increases, which can increase computation cost and risk overfitting.
+
+\subparagraph{Fourier Feature.}
+Fourier features map a continuous state into sinusoidal basis functions. For a normalized state $s \in [0,1]^d$, a typical feature has the form $\cos(\pi k \cdot s)$ or $\sin(\pi k \cdot s)$, where $k$ is an integer vector that controls the frequency. These features are global, meaning that a change in the state affects many feature values at the same time. Fourier features are well suited for approximating smooth value functions and are often used in reinforcement learning with continuous state spaces.
+
+\subparagraph{Tile Coding Feature.}
+Tile coding is a sparse and binary feature representation. The state space is divided into multiple overlapping grids called tilings, each with a different offset. For a given state, exactly one tile in each tiling is active, and its corresponding feature value is set to one, while all other features are zero. As a result, similar states share some active tiles, leading to local generalization. Tile coding is simple, efficient, and commonly used with linear value function approximation.
+
+\subparagraph{RBF Feature.}
+Radial Basis Function (RBF) features are defined using distance-based functions centered at selected points in the state space. Each feature typically has a Gaussian form,
+\[
+\phi_i(s) = \exp\left(-\frac{\|s - c_i\|^2}{2\sigma_i^2}\right),
+\]
+where $c_i$ is the center and $\sigma_i$ controls the width. The feature value is high when the state is close to the center and small when it is far away. RBF features provide smooth and local generalization, but their performance depends on the choice of centers and widths.
+
+\subparagraph{Coarse Coding Feature.}
+Coarse coding represents the state using a set of overlapping regions in the state space. Each feature corresponds to one region and is active if the state lies inside that region. The regions are large, so each feature gives low-resolution information about the state. Multiple overlapping active features together provide generalization across nearby states. Coarse coding is conceptually similar to tile coding but is less structured and often described at a more general level.
+
+\paragraph{Transition and Termination.}
+After the updates, the discounting variable is updated as $I \leftarrow \gamma I$, and the state is updated as $S \leftarrow S'$. This process repeats until a terminal state is reached, at which point the episode ends. Through repeated episodes, the critic improves its value estimates, and the actor learns a policy that approximates the optimal policy.
+
+
+\subsection{Pseudocode}
+
+\begin{tcolorbox}[arc=0mm,width=(\linewidth - 0.2cm)] 
+	\begin{tabbing}
+		{\sc \underline{One-step Actor–Critic}}\\
+    \textbf{Input:} Differentiable policy parameterization $\pi(a | s,\bm{\theta})$ \\
+    \textbf{Input:} Differentiable state-value function $\hat v(s,\bm{w})$ \\
+    \textbf{Parameters:} Step sizes $\alpha^{\bm{\theta}} > 0$, $\alpha^{\bm{w}} > 0$ \\
+        \textbf{Initialize:} Policy parameter $\bm{\theta} \in \mathbb{R}^{d'}$ (e.g., $0$) \\
+        \textbf{Initialize:} Value weights $\bm{w} \in \mathbb{R}^d$ (e.g., $0$) \\
+        \textbf{Loop:} forever \textit{(for each episode)} \\
+        \hspace{0.5cm} Initialize $S$ (initial state) \\
+        \hspace{0.5cm} $I \gets 1$ \\
+        \hspace{0.5cm} \textbf{While} $S$ is not terminal \textbf{do} \\
+        \hspace{1.0cm} Sample $A \sim \pi(\cdot | S,\bm{\theta})$ \\
+        \hspace{1.0cm} Take action $A$, observe $S', R$ \\
+        \hspace{1.0cm} $\delta \gets R + \gamma \hat v(S',\bm{w}) - \hat v(S,\bm{w})$ 
+        \hspace{1.5cm} \textit{(If $S'$ is terminal, $\hat v(S',\bm{w}) = 0$)} \\
+        \hspace{1.0cm} $\bm{w} \gets \bm{w} + \alpha^{\bm{w}} \, \delta \nabla_{\bm{w}} \hat v(S,\bm{w})$ \\
+        \hspace{1.0cm} $\bm{\theta} \gets \bm{\theta} + \alpha^{\bm{\theta}} \, I \, \delta \nabla_{\bm{\theta}} \ln \pi(A | S,\bm{\theta})$ \\
+        \hspace{1.0cm} $I \gets \gamma I$ \\
+        \hspace{1.0cm} $S \gets S'$ \\
+        \hspace{0.5cm} \textbf{end while} \\
+        \textbf{end loop} \\
+	\end{tabbing}
+\end{tcolorbox}
+
+\subsection{Hyperparameter Tuning}
+
+We systematically tuned hyperparameters for four environments (CartPole, Blackjack, FrozenLake, and Taxi). For each environment, we tested different combinations of learning rates for the actor ($\alpha_\theta$) and critic ($\alpha_w$), feature representations (Polynomial, Fourier, Tile Coding, RBF, and Coarse Coding), and feature complexity (such as polynomial order, number of tilings, or number of centers).  
+Each environment was evaluated under four configurations. We analyzed final performance and the stability of the temporal-difference (TD) error.
+
+\subsubsection{CartPole}
+
+\paragraph{Configurations Tested}
+\begin{center}
+\begin{tabular}{c c c c c c}
+\hline
+Config & Feature & $\alpha_\theta$ & $\alpha_w$ & Params & Final Reward \\
+\hline
+1 & Polynomial & 0.001 & 0.01 & order=2 & 29.11 \\
+2 & Polynomial & 0.002 & 0.02 & order=3 & 29.55 \\
+3 & Fourier & 0.001 & 0.01 & order=2 & \textbf{500.00} \\
+4 & RBF & 0.001 & 0.01 & centers=4, $\sigma=0.3$ & \textbf{500.00} \\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph{Key Findings}
+Fourier and RBF features both achieved perfect performance, while polynomial features failed to converge. Fourier features converged faster, reaching the maximum reward after 1 episode, whereas RBF required about 700 episodes. Polynomial features oscillated heavily and never exceeded a reward of 100.
+
+Here we find that for Fourier features, the reward curve quickly rises to the maximum of 500. Given the low dimensionality and high determinism of CartPole, as well as the strong approximation capability of the Fourier basis (order 2), this behavior is considered expected — the algorithm rapidly converges to a stable policy.
+
+\paragraph{Analysis}
+Low-order polynomial features were not expressive enough to model the nonlinear balance dynamics of CartPole. TD errors remained large and unstable, indicating a non-convergent critic. In contrast, Fourier features captured the oscillatory nature of the pole angle effectively, leading to stable learning and near-zero TD errors after convergence. RBF features also achieved stable performance but required more exploration due to localized generalization.
+
+The main takeaway is that, for CartPole, feature representation dominated learning rate selection. Poor features could not be compensated by tuning $\alpha_\theta$ or $\alpha_w$.
+
+\subsubsection{Blackjack}
+
+\paragraph{Configurations Tested}
+\begin{center}
+\begin{tabular}{c c c c c c}
+\hline
+Config & Feature & $\alpha_\theta$ & $\alpha_w$ & Params & Final Reward \\
+\hline
+1 & Polynomial & 0.05 & 0.10 & order=2 & \textbf{0.07} \\
+2 & Polynomial & 0.10 & 0.20 & order=3 & -0.17 \\
+3 & Tile Coding & 0.05 & 0.10 & $4\times3$ & -0.26 \\
+4 & Fourier & 0.05 & 0.10 & order=2 & -0.12 \\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph{Key Findings}
+All configurations showed high variance due to stochastic card draws and sparse rewards. The best result was achieved by the simplest representation, a second-order polynomial with relatively high learning rates.
+
+\paragraph{Analysis}
+A second-order polynomial provided enough capacity to model interactions between player sum, dealer card, and usable ace without overfitting. Increasing polynomial order destabilized learning because the number of parameters grew too large for the small discrete state space. Tile coding performed poorly because it re-discretized already discrete variables, which led to information loss.   
+
+\subsubsection{FrozenLake}
+
+\paragraph{Configurations Tested}
+\begin{center}
+\begin{tabular}{c c c c c c}
+\hline
+Config & Feature & $\alpha_\theta$ & $\alpha_w$ & Params & Final Reward \\
+\hline
+1 & Tile Coding & 0.01 & 0.02 & $4\times4$ & 0.98 \\
+2 & Tile Coding & 0.02 & 0.05 & $6\times4$ & \textbf{1.00} \\
+3 & Coarse Coding & 0.01 & 0.02 & circles=50 & 0.99 \\
+4 & Polynomial & 0.01 & 0.02 & order=2 & 0.18 \\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph{Key Findings}
+Tile coding with higher resolution achieved perfect performance and converged the fastest. Polynomial features almost completely failed to learn the task.
+
+\paragraph{Analysis}
+FrozenLake is a grid world with stochastic transitions, making spatial generalization essential. Tile coding naturally matched this structure and produced stable, monotonic learning with rapidly decreasing TD errors. Increasing the number of tilings improved generalization across nearby states.  
+Polynomial features treated coordinates as continuous variables and could not represent discrete transitions caused by slipping dynamics, leading to biased TD errors and near-random behavior.
+
+\subsubsection{Taxi}
+
+\paragraph{Configurations Tested}
+\begin{center}
+\begin{tabular}{c c c c c c}
+\hline
+Config & Feature & $\alpha_\theta$ & $\alpha_w$ & Params & Final Reward \\
+\hline
+1 & Tile Coding & 0.05 & 0.10 & $6\times3$ & \textbf{-200.18} \\
+2 & Polynomial & 0.05 & 0.10 & order=2 & \textbf{-200.00} \\
+3 & Coarse Coding & 0.05 & 0.10 & circles=50 & -436.43 \\
+4 & RBF & 0.05 & 0.10 & centers=3, $\sigma=0.4$ & \textbf{-200.00} \\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph{Key Findings}
+Tile coding, polynomial, and RBF features all achieved near-optimal performance. Coarse coding failed completely.
+
+\paragraph{Analysis}
+Taxi combines spatial navigation with relational reasoning between taxi, passenger, and destination. Polynomial features successfully modeled pairwise relations, while RBF features captured distance-based structure smoothly. Tile coding worked well due to structured discretization of the state space.  
+Randomly placed coarse coding features caused uneven coverage of states, leading to unstable TD errors and poor policies. Dense step penalties allowed the use of high learning rates without divergence.
+
+\subsubsection{General Insights}
+
+\paragraph{Feature Representation}
+Across all environments, feature choice had a much larger impact than learning rate tuning. Mismatched representations led to large performance gaps that could not be recovered through hyperparameter adjustment.
+
+\paragraph{Learning Rates}
+Optimal learning rates depended on reward structure. Sparse-reward environments benefited from higher learning rates, while smooth control tasks required smaller values for stable updates.
+
+\paragraph{TD Error Diagnostics}
+TD error behavior was a reliable indicator of learning health. Decreasing variance and oscillation around zero signaled convergence, while persistent bias or large variance indicated feature mismatch or instability.
+
+
+\subsection{Experimental Results}
+
+This section reports the experimental outcomes obtained with the tuned hyperparameters and feature representations for each environment. The results are summarized in terms of final average reward and TD error trends.
+
+\subsubsection{CartPole}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/cart_pole.png}
+    \caption{The visualization of Cart Pole environment.}
+\end{figure}
+
+Using Fourier and RBF feature representations, the one-step actor--critic algorithm consistently achieved the maximum reward of 500. Fourier features converged faster, reaching the optimal performance within approximately 500 episodes, whereas RBF features required around 800 episodes. In contrast, polynomial feature representations of order 2 and 3 failed to converge, with final rewards remaining below 30.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/cartpole_tuning.png}
+    \caption{The plot of Cart Pole environment with different hyperparameter tuning.}
+\end{figure}
+
+The TD errors under Fourier and RBF features decreased rapidly during training and stabilized near zero (within $\pm 0.02$) after convergence. Polynomial features exhibited large and persistent TD error oscillations, indicating unstable value estimation.
+
+\subsubsection{Blackjack}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/blackjack.png}
+    \caption{The visualization of Blackjack environment.}
+\end{figure}
+
+In the Blackjack environment, all configurations showed high variance due to stochastic card draws and sparse terminal rewards. The best-performing configuration used a second-order polynomial feature representation with relatively high learning rates, achieving a slightly positive average reward of 0.07.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/blackjack_tuning.png}
+    \caption{The plot of Blackjack environment with different hyperparameter tuning.}
+\end{figure}
+
+Higher-order polynomial features and tile coding resulted in negative average rewards. TD errors remained noisy across all configurations, typically within the range $\pm 0.1$ to $\pm 0.2$, even after extended training. Despite the variance, the TD errors in the best configuration were centered around zero, indicating an unbiased but noisy value estimate.
+
+\subsubsection{FrozenLake}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{report_fig/frozen_lake.png}
+    \caption{The visualization of Frozen Lake environment.}
+\end{figure}
+
+Tile coding and coarse coding both achieved near-optimal performance in FrozenLake. The best configuration, tile coding with $6 \times 4$ tilings, reached a success rate of 1.00 and converged within approximately 1000 episodes. A coarser tile coding scheme ($4 \times 4$) converged more slowly and attained a final reward of 0.98.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/frozenlake_tuning.png}
+    \caption{The plot of Frozen Lake environment with different hyperparameter tuning.}
+\end{figure}
+
+Polynomial features performed poorly, with final performance around 0.18 and no clear convergence trend. Correspondingly, TD errors for tile and coarse coding steadily decreased and converged to small values (around $\pm 0.005$), while polynomial features showed biased and unstable TD errors throughout training.
+
+\subsubsection{Taxi}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/taxi.png}
+    \caption{The visualization of Taxi environment.}
+\end{figure}
+
+In the Taxi environment, tile coding, polynomial, and RBF feature representations all achieved near-optimal performance, with final rewards around $-200$. Tile coding converged the fastest, typically reaching its plateau within 500 episodes. Polynomial and RBF features converged slightly later but displayed smooth and stable learning curves.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/taxi_tuning.png}
+    \caption{The plot of Taxi environment with different hyperparameter tuning.}
+\end{figure}
+
+
+Coarse coding failed to learn an effective policy, resulting in a much lower final reward of approximately $-436$. For the successful configurations, TD errors decreased quickly and remained close to zero (within $\pm 0.005$). The failed configuration exhibited high-variance TD errors that did not stabilize over training.
+
+
+\section{Monte Carlo Tree Search algorithm}
+\subsection{Brief Description}
+\subsection{Pseudocode}
+\subsection{Hyperparameter Tuning}
+\subsection{Experimental Results}
 
 
         
