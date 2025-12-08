@@ -104,7 +104,7 @@
     \end{Large}
     \\
     \vspace{0.15cm}
-    Aichen Qian, Linfeng Lyu, Wanqi Wang
+    Aichen Qian, Linfeng Lyu, Wanqi Li
 \end{center}
 \addcontentsline{toc}{subsection}{\textbf{Homework 5}}
 
@@ -200,7 +200,43 @@ to make sure it is appropriate for this course project.
 
 \section{REINFORCE with Baseline algorithm}
 \subsection{Brief Description}
+REINFORCE is a Monte Carlo policy gradient algorithm that optimizes parameterized policies to maximize expected total return. 
+The agent interacts with the environment in episodes, collecting trajectories of states, actions, and rewards. 
+After each episode, the agent updates its policy parameters based on the observed returns using gradient ascent.
+$$\bm{\theta}_{t+1} = \bm{\theta}_t + \alpha G_t \frac{\nabla \pi(A_t|S_t, \bm{\theta}_t)}{\pi(A_t|S_t, \bm{\theta}_t)}$$
+where $G_t$ is the return following time step $t$, $\alpha$ is the learning rate, and $\pi(a|s,\bm{\theta})$ is the policy parameterized by $\bm{\theta}$.
+\\
+\\
+The REINFORCE with Baseline algorithm introduces a baseline function to the REINFORCE algorithm so that the equation becomes:
+$$\bm{\theta}_{t+1} = \bm{\theta}_t + \alpha (G_t - b(S_t)) \frac{\nabla \pi(A_t|S_t, \bm{\theta}_t)}{\pi(A_t|S_t, \bm{\theta}_t)}$$
+where $b(S_t)$ is the baseline function that depends only on the state $S_t$.
+The baseline function can be an function as long as it does not depend on the action and varies with states for MDPs. 
+One natural choice is for baseline to be an estimate of the state-value function $\hat{v}(S_t, \bm{w})$ where $\bm{w}$ is the state-value weights that can be learned using Monte Carlo methods:
+$$\bm{w}_{t+1} = \bm{w}_t + \alpha^{\bm{w}} (G_t - \hat{v}(S_t, \bm{w}_t)) \nabla \hat{v}(S_t, \bm{w}_t)$$
+
 \subsection{Pseudocode}
+
+
+\begin{tcolorbox}[arc=0mm,width=(\linewidth - 0.2cm)] 
+	\begin{tabbing}
+		{\sc \underline{REINFORCE with Baseline}}\\
+    \textbf{Input:} Differentiable policy parameterization $\pi(a | s,\bm{\theta})$ \\
+    \textbf{Input:} Differentiable state-value function $\hat v(s,\bm{w})$ \\
+    \textbf{Parameters:} Step sizes $\alpha > 0$, $\alpha^{\bm{w}} > 0$ \\
+        \textbf{Initialize:} Policy parameter $\bm{\theta} \in \mathbb{R}^{d'}$ (e.g., $0$) \\
+        \textbf{Initialize:} Value weights $\bm{w} \in \mathbb{R}^d$ (e.g., $0$) \\
+        \textbf{Loop:} forever \textit{(for each episode)} \\
+        \hspace{0.5cm} Generate an episode: $S_0, A_0, R_1, S_1, A_1, R_2, \dots, S_{T-1}, A_{T-1}, R_T$ \\
+        \hspace{0.5cm} \textbf{For} $t = 0, 1, \dots, T-1$ \textbf{do} \\
+        \hspace{1.0cm} $G \gets R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots + \gamma^{T-t-1} R_T$ \\
+        \hspace{1.0cm} $\delta \gets G - \hat v(S_t,\bm{w})$ \\
+        \hspace{1.0cm} $\bm{w} \gets \bm{w} + \alpha^{\bm{w}} \delta \nabla_{\bm{w}} \hat v(S_t,\bm{w})$ \\
+        \hspace{1.0cm} $\bm{\theta} \gets \bm{\theta} + \alpha \gamma^t \delta \nabla_{\bm{\theta}} \ln \pi(A_t | S_t,\bm{\theta})$ \\
+        \hspace{0.5cm} \textbf{end for} \\
+        \textbf{end loop} \\
+    
+	\end{tabbing}
+\end{tcolorbox}
 \subsection{Hyperparameter Tuning}
 \subsection{Experimental Results}
 
