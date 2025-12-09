@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 from algo import OneStepActorCritic, train
@@ -5,20 +6,31 @@ from environments import make_env
 
 
 def run_config(env_name, config, config_name):
-    """Run single configuration"""
     env = make_env(env_name)
+    
+    alpha_theta = config['alpha_theta']
+    alpha_w = config['alpha_w']
+    gamma = config['gamma']
+    feature_type = config['feature_type']
+    num_episodes = config['num_episodes']
+    
+    feature_kwargs = {
+        k: v for k, v in config.items() 
+        if k not in ['alpha_theta', 'alpha_w', 'gamma', 'feature_type', 'num_episodes']
+    }
+    
     agent = OneStepActorCritic(
         num_actions=env.num_actions,
         state_dim=env.state_dim,
-        alpha_theta=config['alpha_theta'],
-        alpha_w=config['alpha_w'],
-        gamma=config['gamma'],
-        feature_type=config['feature_type'],
+        alpha_theta=alpha_theta,
+        alpha_w=alpha_w,
+        gamma=gamma,
+        feature_type=feature_type,
         state_bounds=env.state_bounds,
-        **{k: v for k, v in config.items() if k not in ['alpha_theta', 'alpha_w', 'gamma', 'feature_type', 'num_episodes']}
+        **feature_kwargs
     )
     
-    history = train(env, agent, num_episodes=config['num_episodes'], verbose=False)
+    history = train(env, agent, num_episodes=num_episodes, verbose=False)
     env.close()
     
     final_reward = np.mean(history['rewards'][-100:])
@@ -28,7 +40,10 @@ def run_config(env_name, config, config_name):
 
 
 def plot_comparison(results, env_name):
-    """Plot 4 configs comparison"""
+
+    save_dir = 'report_fig'
+    os.makedirs(save_dir, exist_ok=True)
+    
     fig, axes = plt.subplots(2, 4, figsize=(20, 8))
     
     for idx, (name, data) in enumerate(results.items()):
@@ -39,29 +54,30 @@ def plot_comparison(results, env_name):
         ma_reward = np.convolve(rewards, np.ones(window)/window, mode='valid')
         ma_td = np.convolve(td_errors, np.ones(window)/window, mode='valid')
         
-        # Reward plot
+        # Plot reward curve
         ax1 = axes[0, idx]
         ax1.plot(ma_reward, linewidth=2, color='blue')
-        ax1.set_title(f"{name}\nFinal: {data['final_reward']:.2f}", fontweight='bold', fontsize=10)
+        ax1.set_title(f"{name}\nFinal: {data['final_reward']:.2f}", 
+                     fontweight='bold', fontsize=10)
         ax1.set_ylabel('Reward')
         ax1.grid(True, alpha=0.3)
         
-        # TD Error plot
+        # Plot TD error curve
         ax2 = axes[1, idx]
         ax2.plot(ma_td, linewidth=2, color='green')
-        ax2.axhline(y=0, color='black', linestyle='--')
+        ax2.axhline(y=0, color='black', linestyle='--', alpha=0.5)
         ax2.set_xlabel('Episode')
         ax2.set_ylabel('TD Error')
         ax2.grid(True, alpha=0.3)
     
-    plt.suptitle(f'{env_name.upper()} - 4 Configurations Comparison', fontsize=14, fontweight='bold')
+    plt.suptitle(f'{env_name.upper()} - 4 Configurations Comparison', 
+                fontsize=14, fontweight='bold')
     plt.tight_layout()
-    plt.savefig(f'{env_name}_tuning.png', dpi=150, bbox_inches='tight')
+    
+    save_path = os.path.join(save_dir, f'{env_name}_tuning.png')
+    plt.savefig(save_path, dpi=150, bbox_inches='tight')
     plt.close()
-    print(f"Saved: {env_name}_tuning.png")
-
-
-# ==================== 4 Configs per Environment ====================
+    print(f"Saved: {save_path}")
 
 CARTPOLE_CONFIGS = {
     'Config 1: Poly Order 2 (baseline)': {
@@ -211,12 +227,8 @@ TAXI_CONFIGS = {
     }
 }
 
-
-# ==================== Main ====================
-
 if __name__ == '__main__':
     
-    # CartPole
     print("\n" + "="*60)
     print("CARTPOLE")
     print("="*60)
@@ -226,7 +238,6 @@ if __name__ == '__main__':
         results[name] = {'history': history, 'final_reward': final_reward}
     plot_comparison(results, 'cartpole')
     
-    # Blackjack
     print("\n" + "="*60)
     print("BLACKJACK")
     print("="*60)
@@ -236,7 +247,6 @@ if __name__ == '__main__':
         results[name] = {'history': history, 'final_reward': final_reward}
     plot_comparison(results, 'blackjack')
     
-    # FrozenLake
     print("\n" + "="*60)
     print("FROZENLAKE")
     print("="*60)
@@ -246,7 +256,6 @@ if __name__ == '__main__':
         results[name] = {'history': history, 'final_reward': final_reward}
     plot_comparison(results, 'frozenlake')
     
-    # Taxi
     print("\n" + "="*60)
     print("TAXI")
     print("="*60)
@@ -256,12 +265,4 @@ if __name__ == '__main__':
         results[name] = {'history': history, 'final_reward': final_reward}
     plot_comparison(results, 'taxi')
     
-    print("\n" + "="*60)
-    print("TUNING COMPLETE!")
-    print("="*60)
-    print("Generated files:")
-    print("  - cartpole_tuning.png")
-    print("  - blackjack_tuning.png")
-    print("  - frozenlake_tuning.png")
-    print("  - taxi_tuning.png")
-    print("="*60)
+    print("COMPLETE!")

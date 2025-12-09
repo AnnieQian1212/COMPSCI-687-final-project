@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.8)  7 DEC 2025 01:37
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.8)  9 DEC 2025 17:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -958,25 +958,27 @@ File: report_fig/blackjack.png Graphic file (type bmp)
  [7]
 File: report_fig/blackjack_tuning.png Graphic file (type bmp)
 <report_fig/blackjack_tuning.png>
- [8]
 File: report_fig/frozen_lake.png Graphic file (type bmp)
 <report_fig/frozen_lake.png>
+ [8]
 File: report_fig/frozenlake_tuning.png Graphic file (type bmp)
 <report_fig/frozenlake_tuning.png>
- [9]
 File: report_fig/taxi.png Graphic file (type bmp)
 <report_fig/taxi.png>
 File: report_fig/taxi_tuning.png Graphic file (type bmp)
 <report_fig/taxi_tuning.png>
+ [9]
+File: report_fig/taxi_tuning_onehot.png Graphic file (type bmp)
+<report_fig/taxi_tuning_onehot.png>
  [10] [11] (./final_project_report.aux)
 Package rerunfilecheck Info: File `final_project_report.out' has not changed.
-(rerunfilecheck)             Checksum: 2DE03D226794E744DEB46E5A2C211FC1;2475.
+(rerunfilecheck)             Checksum: 7D1B59B593D8A2DEDD6D287174B09CCA;2628.
  ) 
 Here is how much of TeX's memory you used:
- 33616 strings out of 476683
- 673502 string characters out of 5804047
- 1865018 words of memory out of 5000000
- 53246 multiletter control sequences out of 15000+600000
+ 33624 strings out of 476683
+ 673790 string characters out of 5804047
+ 1866018 words of memory out of 5000000
+ 53253 multiletter control sequences out of 15000+600000
  520637 words of font info for 76 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  99i,7n,104p,1013b,464s stack positions out of 10000i,1000n,20000p,200000b,200000s

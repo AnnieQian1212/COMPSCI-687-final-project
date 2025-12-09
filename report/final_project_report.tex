@@ -204,7 +204,7 @@ to make sure it is appropriate for this course project.
 \subsection{Hyperparameter Tuning}
 \subsection{Experimental Results}
 
-\section{One-Step Actor-Critic algorithm}
+\section{One-Step Actor-Critic algorithm (performed by Aichen Qian)}
 \subsection{Brief Description}
 
 \paragraph{One-step Actor-Critic Algorithm.}
@@ -310,7 +310,7 @@ Config & Feature & $\alpha_\theta$ & $\alpha_w$ & Params & Final Reward \\
 \paragraph{Key Findings}
 Fourier and RBF features both achieved perfect performance, while polynomial features failed to converge. Fourier features converged faster, reaching the maximum reward after 1 episode, whereas RBF required about 700 episodes. Polynomial features oscillated heavily and never exceeded a reward of 100.
 
-Here we find that for Fourier features, the reward curve quickly rises to the maximum of 500. Given the low dimensionality and high determinism of CartPole, as well as the strong approximation capability of the Fourier basis (order 2), this behavior is considered expected — the algorithm rapidly converges to a stable policy.
+Here we find that for Fourier features, the reward curve quickly rises to the maximum of 500. Given the low dimensionality and high determinism of Cart Pole, as well as the strong approximation capability of the Fourier basis (order 2), this behavior is considered expected — the algorithm rapidly converges to a stable policy.
 
 \paragraph{Analysis}
 Low-order polynomial features were not expressive enough to model the nonlinear balance dynamics of CartPole. TD errors remained large and unstable, indicating a non-convergent critic. In contrast, Fourier features captured the oscillatory nature of the pole angle effectively, leading to stable learning and near-zero TD errors after convergence. RBF features also achieved stable performance but required more exploration due to localized generalization.
@@ -399,17 +399,15 @@ TD error behavior was a reliable indicator of learning health. Decreasing varian
 
 \subsection{Experimental Results}
 
-This section reports the experimental outcomes obtained with the tuned hyperparameters and feature representations for each environment. The results are summarized in terms of final average reward and TD error trends.
-
 \subsubsection{Cart Pole}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{report_fig/cart_pole.png}
+    \includegraphics[width=0.6\textwidth]{report_fig/cart_pole.png}
     \caption{The visualization of Cart Pole environment.}
 \end{figure}
 
-Using Fourier and RBF feature representations, the one-step actor--critic algorithm consistently achieved the maximum reward of 500. Fourier features converged faster, reaching the optimal performance within 1 episode, whereas RBF features required around 700 episodes. In contrast, polynomial feature representations of order 2 and 3 failed to converge, with final rewards remaining below 30.
+Using Fourier and RBF feature representations, the one-step actor-critic algorithm consistently achieved the maximum reward of 500. Fourier features converged faster, reaching the optimal performance within 1 episode, whereas RBF features required around 700 episodes. In contrast, polynomial feature representations of order 2 and 3 failed to converge, with final rewards remaining below 30.
 
 \begin{figure}[H]
     \centering
@@ -443,7 +441,7 @@ We think this one-step actor-critic algorithm is not very suitable for the Black
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{report_fig/frozen_lake.png}
+    \includegraphics[width=0.5\textwidth]{report_fig/frozen_lake.png}
     \caption{The visualization of Frozen Lake environment.}
 \end{figure}
 
@@ -473,8 +471,17 @@ In the Taxi environment, tile coding, polynomial, and RBF feature representation
     \caption{The plot of Taxi environment with different hyperparameter tuning.}
 \end{figure}
 
-
 Coarse coding failed to learn an effective policy, resulting in a much lower final reward of approximately $-436$. For the successful configurations, TD errors decreased quickly and remained close to zero (within $\pm 0.005$). The failed configuration exhibited high-variance TD errors that did not stabilize over training.
+
+The reward is strange as it is negative. In taxi environment, the agent receives a reward of -1 for each time step until it successfully delivers the passenger to the destination, at which point it receives a reward of +20. Therefore, we tried to use onehot encoding to represent the state, hoping to capture the discrete nature of the environment better. However, this approach did not yield significant improvements in performance compared to other feature representations as shown below.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{report_fig/taxi_tuning_onehot.png}
+    \caption{The plot of Taxi environment with onehot encoding feature representation.}
+\end{figure}
+
+We think maybe one-step actor-critic algorithm is not very suitable for the Taxi environment.
 
 
 \section{Monte Carlo Tree Search algorithm}
