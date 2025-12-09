@@ -27,10 +27,6 @@ pip install -r requirements.txt
 - **Blackjack**: Card game with discrete actions
 - **FrozenLake**: Navigate slippery grid to goal
 - **Taxi**: Pick up and drop off passengers
-- **MountainCar**: Drive up a steep hill
-- **Acrobot**: Swing up a two-link robot arm
-- **LunarLander**: Land spacecraft safely
-- **CliffWalking**: Navigate grid avoiding cliff
 
 ## Quick Start
 
