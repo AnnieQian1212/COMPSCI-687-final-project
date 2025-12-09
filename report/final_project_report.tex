@@ -486,9 +486,99 @@ We think maybe one-step actor-critic algorithm is not very suitable for the Taxi
 
 \section{Monte Carlo Tree Search algorithm}
 \subsection{Brief Description}
+We implemented the Monte Carlo Tree Search (MCTS) algorithm, a decision-time planning method that builds a search tree to estimate the value of actions from the current state. Our implementation follows the standard four phases:
+\begin{itemize}
+    \item \textbf{Selection:} Starting from the root, we traverse the tree by selecting child nodes that maximize the Upper Confidence Bound (UCB1) statistic:
+    \[ UCB(n) = \frac{Q(n)}{N(n)} + c \sqrt{\frac{\ln N_{parent}}{N(n)}} \]
+    where $Q(n)$ is the total reward of node $n$, $N(n)$ is the visit count, and $c$ is the exploration constant.
+    \item \textbf{Expansion:} Once a leaf node is reached, if it is not terminal, we expand it by adding a child node corresponding to an untried action.
+    \item \textbf{Simulation (Rollout):} From the newly expanded node, we perform a rollout using a random policy until a terminal state is reached or a maximum depth is exceeded.
+    \item \textbf{Backpropagation:} The cumulative reward obtained from the rollout is propagated back up the tree, updating the visit counts and value estimates of all traversed nodes.
+\end{itemize}
+
+We tailored the simulation step for two distinct environment types:
+\begin{itemize}
+    \item \textbf{Deterministic (CartPole-v1):} We utilized an action-sequence replay approach. To reach a specific node during simulation, the agent resets the environment to the root state and replays the sequence of actions stored in the tree branch.
+    \item \textbf{Stochastic (Blackjack-v1):} We utilized a state-copying approach. The environment instance itself is deep-copied at the expansion phase to ensure that rollouts do not corrupt the true environment state.
+\end{itemize}
+
+
 \subsection{Pseudocode}
+\begin{tcolorbox}[arc=0mm,width=(\linewidth - 0.2cm)] 
+	\begin{tabbing}
+		{\sc \underline{Monte Carlo Tree Search (MCTS)}}\\
+    \textbf{Input:} Environment $E$, Current State $S_0$, Action Space $\mathcal{A}$ \\
+    \textbf{Parameters:} Simulations per step $N_{sim}$, Exploration constant $c$ \\
+    \textbf{Output:} Best Action $a^*$ \\
+    \\
+    Create root node $v_0$ with state $S_0$ \\
+    \textbf{For} $i = 1$ \textbf{to} $N_{sim}$ \textbf{do} \\
+        \hspace{0.5cm} $v_l \gets \text{TreePolicy}(v_0)$ \textit{// Selection phase using UCB1} \\
+        \hspace{0.5cm} \textbf{If} $v_l$ is not terminal \textbf{then} \\
+        \hspace{1.0cm} $v_c \gets \text{Expand}(v_l)$ \textit{// Expansion phase} \\
+        \hspace{1.0cm} $\Delta \gets \text{DefaultPolicy}(v_c)$ \textit{// Simulation/Rollout phase} \\
+        \hspace{0.5cm} \textbf{End If} \\
+        \hspace{0.5cm} $\text{Backpropagate}(v_c, \Delta)$ \textit{// Backpropagation phase} \\
+    \textbf{End For} \\
+    \textbf{Return} $\arg\max_{a \in \mathcal{A}} N(\text{child}(v_0, a))$
+	\end{tabbing}
+\end{tcolorbox}
+
 \subsection{Hyperparameter Tuning}
+We evaluated the agent on two Gymnasium environments: \texttt{CartPole-v1} and \texttt{Blackjack-v1}. The primary hyperparameters tuned were the number of MCTS simulations per decision step ($n_{sim}$) and the UCB exploration constant ($c$).
+
+\paragraph{Simulation Budget ($n_{sim}$)}
+We varied $n_{sim}$ to analyze the trade-off between computational cost and decision quality.
+\begin{itemize}
+    \item For \textbf{CartPole}, we tested $n_{sim} \in \{10, 25, 50, 100, 200\}$.
+    \item For \textbf{Blackjack}, we tested $n_{sim} \in \{25, 50, 100, 200, 500\}$.
+\end{itemize}
+As expected, higher simulation counts generally led to better performance but increased the runtime linearly. For CartPole, performance stabilized around 50 simulations, while Blackjack required more extensive search (100+) to reliably outperform the baseline due to the high variance in card distribution.
+
+\paragraph{Exploration Constant ($c$)}
+We tested $c \in \{0.5, 1.0, 1.41, 2.0\}$. The theoretical value of $\sqrt{2} \approx 1.41$ provided the most robust balance between exploring new actions and exploiting known high-value paths across both domains.
+
 \subsection{Experimental Results}
+It is important to note that unlike the Reinforcement Learning algorithms implemented in Option 2, our MCTS agent does not "learn" parameters across episodes. MCTS is a decision-time planning algorithm where each episode represents an independent experiment.
+
+The "intelligence" of the agent is determined by the computational budget (number of simulations, $N_{sim}$) allocated to each decision step, rather than accumulated experience over time. Consequently, the performance graphs (e.g., Figure \ref{fig:cartpole_curve}) do not exhibit the typical rising trend of a learning curve. Instead, they show a flat, stable performance characteristic of the fixed simulation budget. We increased the number of episodes solely to smooth out statistical fluctuations arising from the stochastic nature of the rollouts, ensuring the reported average reward is statistically significant.
+\subsubsection{Cart Pole}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/cartpole_learning_curve.png}
+    \caption{Learning curve for MCTS on CartPole-v1. The agent consistently solves the environment (reward 500) without explicit training, relying solely on planning.}
+    \label{fig:cartpole_curve}
+\end{figure}
+
+The MCTS agent demonstrated superior performance on the deterministic CartPole-v1 environment. Unlike reinforcement learning algorithms that require episodes to learn weights, MCTS achieved near-optimal rewards almost immediately by planning ahead. Figure \ref{fig:cartpole_curve} shows the agent maintaining the maximum reward threshold.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/cartpole_nsim_comparison.png}
+    \caption{Impact of simulation count on CartPole performance. Higher simulations reduce the variance and prevent premature termination of the episode.}
+    \label{fig:cartpole_nsim}
+\end{figure}
+
+Figure \ref{fig:cartpole_nsim} illustrates that even with a low budget of 10 simulations, the agent performs reasonably well, but increasing the budget to 50 or more ensures the pole is balanced for the full duration of the episode consistently.
+
+\subsubsection{Blackjack}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/blackjack_win_rate.png}
+    \caption{}
+    \label{fig:blackjack_winrate}
+\end{figure}
+
+In the stochastic Blackjack-v1 environment, MCTS didn't achieve high score. As shown in Figure \ref{fig:blackjack_winrate}, the MCTS agent achieves a win rate of approximately 30\%, which is has not much improvements. Maybe because Blackjack is a Stochastic environment.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/blackjack_nsim_comparison.png}
+    \caption{Win rate in Blackjack as a function of MCTS simulations. Diminishing returns are observed after 100 simulations.}
+    \label{fig:blackjack_nsim}
+\end{figure}
+
+The hyperparameter study in Figure \ref{fig:blackjack_nsim} confirms that while planning helps, the stochastic nature of the dealer's hand limits the maximum achievable win rate. Increasing simulations beyond 100 yields diminishing returns, suggesting that the agent has successfully identified the best statistical moves (Basic Strategy) given the visible information.
 
 
         
