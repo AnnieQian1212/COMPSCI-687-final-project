@@ -1,3 +1,0 @@
-policy gradient method
-directly learn a parameterized policy
-\theta: parameter vector
