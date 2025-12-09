@@ -238,7 +238,54 @@ $$\bm{w}_{t+1} = \bm{w}_t + \alpha^{\bm{w}} (G_t - \hat{v}(S_t, \bm{w}_t)) \nabl
 	\end{tabbing}
 \end{tcolorbox}
 \subsection{Hyperparameter Tuning}
+For the REINFORCE with Baseline algorithm, we tuned the following hyperparameters:
+\begin{itemize}
+    \item Step size $\alpha$: We experimented with values in the range [0.00001, 0.1].
+    \item Step size $\alpha^{\bm{w}}$: Similar to $\alpha$, we tested values in the range [0.00001, 0.1].
+    \item Discount factor $\gamma$: We evaluated values between 1 and 0.90 to experiment with different rate of learning.
+    \item Policy Network Architecture: We tested different architectures including single-layer and multi-layer neural networks with varying numbers of neurons mainly from 4 to 128. 
+    \item Value Function Network Architecture: Similar to the policy network, we experimented with different architectures.
+\end{itemize}
+We performed the grid search process for searching the optimal hyperparameters on each of the four environments: CartPole, Blackjack, FrozenLake, and Taxi. 
+For each environment, we evaluated the performance of the algorithm under different hyperparameter configurations by measuring the average return over 100 episodes.
+%With certain environments, there are parameters that we explored further than the bound we metioned
+
+
 \subsection{Experimental Results}
+The goal for all experiments is to maximize the final average return over 100 episodes.
+\subsubsection{Cart Pole}
+For Cart Pole environment, the set of hyperparameters that achieved getting reward of 500 after 2000 episode is when
+$\alpha = 0.01$, $\alpha^{\bm{w}} = 0.001$, $\gamma \geq 0.97$ with two layers in both policy and value networks that has at least 32 neurons.
+One of the best result we got is shown in Figure \ref{CartPoleBest}. 
+This result also indicated the unstabling leanring process that happened frequently during our experiments.
+But with this set of hyperparameters, the agent is able to relearn quickly after a huge drop in performance.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/CartPole_a0.01_aw0.001_g0.97_p(64, 32)_v(32, 16).png}
+    \caption{Learning curve for best result in CartPole environment.}
+    \label{CartPoleBest}
+\end{figure}
+
+One interesting result we found is that if $\alpha$ and $\alpha^{\bm{w}}$ are drasticly differnt from each other, there will be meaningful learning, example in Figure \ref{CartDifferentAlpha}.
+However, if the policy network expends or value network to three layers, then there exist a sudden jump in the learning process, shown in Figure \ref{CartJumpLearning}. 
+In this case, the learning happens around 1250 episode. 
+We found that increase the learning rate will bring the jump ealier.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/CartPole_a0.01_aw0.0001_g0.97_p(32, 16)_v(16, 32).png}
+    \caption{Learning curve for drastically different $\alpha$ and $\alpha^{\bm{w}}$ in CartPole.}
+    \label{CartDifferentAlpha}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/CartPole_a0.01_aw0.0001_g0.97_p(16, 16, 16)_v(16, 32).png}
+    \caption{Learning curve for three-layer policy network in CartPole.}
+    \label{CartJumpLearning}
+\end{figure}
+
+\subsubsection{Blackjack}
+\subsubsection{Frozen Lake}
+\subsubsection{Taxi}
 
 \section{One-Step Actor-Critic algorithm}
 \subsection{Brief Description}

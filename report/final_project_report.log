@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.25)  8 DEC 2025 13:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.25)  9 DEC 2025 16:40
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -953,69 +953,89 @@ Underfull \hbox (badness 10000) in paragraph at lines 206--211
 
 
 [2]
+<report_fig/CartPole_a0.01_aw0.001_g0.97_p(64, 32)_v(32, 16).png, id=133, 939.51pt x 505.89pt>
+File: report_fig/CartPole_a0.01_aw0.001_g0.97_p(64, 32)_v(32, 16).png Graphic file (type png)
+<use report_fig/CartPole_a0.01_aw0.001_g0.97_p(64, 32)_v(32, 16).png>
+Package pdftex.def Info: report_fig/CartPole_a0.01_aw0.001_g0.97_p(64, 32)_v(32, 16).png  used on input line 264.
+(pdftex.def)             Requested size: 328.82707pt x 177.05643pt.
+<report_fig/CartPole_a0.01_aw0.0001_g0.97_p(32, 16)_v(16, 32).png, id=137, 939.51pt x 505.89pt>
+File: report_fig/CartPole_a0.01_aw0.0001_g0.97_p(32, 16)_v(16, 32).png Graphic file (type png)
+<use report_fig/CartPole_a0.01_aw0.0001_g0.97_p(32, 16)_v(16, 32).png>
+Package pdftex.def Info: report_fig/CartPole_a0.01_aw0.0001_g0.97_p(32, 16)_v(16, 32).png  used on input line 275.
+(pdftex.def)             Requested size: 328.82707pt x 177.05643pt.
+<report_fig/CartPole_a0.01_aw0.0001_g0.97_p(16, 16, 16)_v(16, 32).png, id=138, 939.51pt x 505.89pt>
+File: report_fig/CartPole_a0.01_aw0.0001_g0.97_p(16, 16, 16)_v(16, 32).png Graphic file (type png)
+<use report_fig/CartPole_a0.01_aw0.0001_g0.97_p(16, 16, 16)_v(16, 32).png>
+Package pdftex.def Info: report_fig/CartPole_a0.01_aw0.0001_g0.97_p(16, 16, 16)_v(16, 32).png  used on input line 281.
+(pdftex.def)             Requested size: 328.82707pt x 177.05643pt.
 
-[3]
 
-[4]
+[3 <./report_fig/CartPole_a0.01_aw0.001_g0.97_p(64, 32)_v(32, 16).png>]
+
+[4 <./report_fig/CartPole_a0.01_aw0.0001_g0.97_p(32, 16)_v(16, 32).png> <./report_fig/CartPole_a0.01_aw0.0001_g0.97_p(16, 16, 16)_v(16, 32).png>]
 
 [5]
-<report_fig/cart_pole.png, id=166, 602.25pt x 401.5pt>
+
+[6]
+
+[7]
+<report_fig/cart_pole.png, id=192, 602.25pt x 401.5pt>
 File: report_fig/cart_pole.png Graphic file (type png)
 <use report_fig/cart_pole.png>
-Package pdftex.def Info: report_fig/cart_pole.png  used on input line 444.
+Package pdftex.def Info: report_fig/cart_pole.png  used on input line 491.
 (pdftex.def)             Requested size: 328.82707pt x 219.22668pt.
 
 
-[6]
-<report_fig/cartpole_tuning.png, id=181, 1437.6912pt x 569.0058pt>
+[8]
+<report_fig/cartpole_tuning.png, id=207, 1437.6912pt x 569.0058pt>
 File: report_fig/cartpole_tuning.png Graphic file (type png)
 <use report_fig/cartpole_tuning.png>
-Package pdftex.def Info: report_fig/cartpole_tuning.png  used on input line 452.
+Package pdftex.def Info: report_fig/cartpole_tuning.png  used on input line 499.
 (pdftex.def)             Requested size: 328.82707pt x 130.13927pt.
-<report_fig/blackjack.png, id=183, 602.25pt x 501.875pt>
+<report_fig/blackjack.png, id=208, 602.25pt x 501.875pt>
 File: report_fig/blackjack.png Graphic file (type png)
 <use report_fig/blackjack.png>
-Package pdftex.def Info: report_fig/blackjack.png  used on input line 462.
+Package pdftex.def Info: report_fig/blackjack.png  used on input line 509.
 (pdftex.def)             Requested size: 328.82707pt x 274.03336pt.
 
 
-[7 <./report_fig/cart_pole.png> <./report_fig/cartpole_tuning.png>]
-<report_fig/blackjack_tuning.png, id=194, 1435.2822pt x 569.0058pt>
+[9 <./report_fig/cart_pole.png> <./report_fig/cartpole_tuning.png>]
+<report_fig/blackjack_tuning.png, id=218, 1435.2822pt x 569.0058pt>
 File: report_fig/blackjack_tuning.png Graphic file (type png)
 <use report_fig/blackjack_tuning.png>
-Package pdftex.def Info: report_fig/blackjack_tuning.png  used on input line 470.
+Package pdftex.def Info: report_fig/blackjack_tuning.png  used on input line 517.
 (pdftex.def)             Requested size: 328.82707pt x 130.35632pt.
 
 
-[8 <./report_fig/blackjack.png> <./report_fig/blackjack_tuning.png>]
-<report_fig/frozen_lake.png, id=204, 256.96pt x 256.96pt>
+[10 <./report_fig/blackjack.png> <./report_fig/blackjack_tuning.png>]
+<report_fig/frozen_lake.png, id=228, 256.96pt x 256.96pt>
 File: report_fig/frozen_lake.png Graphic file (type png)
 <use report_fig/frozen_lake.png>
-Package pdftex.def Info: report_fig/frozen_lake.png  used on input line 482.
+Package pdftex.def Info: report_fig/frozen_lake.png  used on input line 529.
 (pdftex.def)             Requested size: 281.85587pt x 281.8766pt.
-<report_fig/frozenlake_tuning.png, id=205, 1436.2458pt x 569.0058pt>
+<report_fig/frozenlake_tuning.png, id=229, 1436.2458pt x 569.0058pt>
 File: report_fig/frozenlake_tuning.png Graphic file (type png)
 <use report_fig/frozenlake_tuning.png>
-Package pdftex.def Info: report_fig/frozenlake_tuning.png  used on input line 490.
+Package pdftex.def Info: report_fig/frozenlake_tuning.png  used on input line 537.
 (pdftex.def)             Requested size: 328.82707pt x 130.2695pt.
 
 
-[9 <./report_fig/frozen_lake.png> <./report_fig/frozenlake_tuning.png>]
-<report_fig/taxi.png, id=215, 552.0625pt x 351.3125pt>
+[11 <./report_fig/frozen_lake.png> <./report_fig/frozenlake_tuning.png>]
+<report_fig/taxi.png, id=239, 552.0625pt x 351.3125pt>
 File: report_fig/taxi.png Graphic file (type png)
 <use report_fig/taxi.png>
-Package pdftex.def Info: report_fig/taxi.png  used on input line 500.
+Package pdftex.def Info: report_fig/taxi.png  used on input line 547.
 (pdftex.def)             Requested size: 328.82707pt x 209.26135pt.
-<report_fig/taxi_tuning.png, id=216, 1436.7276pt x 569.0058pt>
+<report_fig/taxi_tuning.png, id=240, 1436.7276pt x 569.0058pt>
 File: report_fig/taxi_tuning.png Graphic file (type png)
 <use report_fig/taxi_tuning.png>
-Package pdftex.def Info: report_fig/taxi_tuning.png  used on input line 508.
+Package pdftex.def Info: report_fig/taxi_tuning.png  used on input line 555.
 (pdftex.def)             Requested size: 328.82707pt x 130.22609pt.
 
 
-[10 <./report_fig/taxi.png> <./report_fig/taxi_tuning.png>]
+[12 <./report_fig/taxi.png> <./report_fig/taxi_tuning.png>]
 
-[11] (final_project_report.aux)
+[13] (final_project_report.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
@@ -1024,17 +1044,17 @@ Package rerunfilecheck Info: File `final_project_report.out' has not changed.
 (rerunfilecheck)             Checksum: 2DE03D226794E744DEB46E5A2C211FC1;2475.
  ) 
 Here is how much of TeX's memory you used:
- 34326 strings out of 468130
- 681255 string characters out of 5430633
- 1237917 words of memory out of 5000000
- 62175 multiletter control sequences out of 15000+600000
- 640158 words of font info for 144 fonts, out of 8000000 for 9000
+ 34361 strings out of 468130
+ 682973 string characters out of 5430633
+ 1238189 words of memory out of 5000000
+ 62199 multiletter control sequences out of 15000+600000
+ 640209 words of font info for 145 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  116i,7n,121p,1145b,588s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\liwan\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/liwan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/liwan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/liwan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/liwan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/liwan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/liwan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/liwan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/liwan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><C:/Users/liwan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/liwan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/liwan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/liwan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/liwan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/liwan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/liwan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/liwan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on final_project_report.pdf (11 pages, 1330733 bytes).
+Output written on final_project_report.pdf (13 pages, 1632197 bytes).
 PDF statistics:
- 317 PDF objects out of 1000 (max. 8388607)
- 72 named destinations out of 1000 (max. 500000)
- 26949 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 345 PDF objects out of 1000 (max. 8388607)
+ 81 named destinations out of 1000 (max. 500000)
+ 26964 words of extra memory for PDF output out of 29859 (max. 10000000)
 
