@@ -22,6 +22,8 @@ pip install -r requirements.txt
 - **FrozenLake**: Navigate slippery grid to goal
 - **Taxi**: Pick up and drop off passengers
 
+# REINFORCE with baseline
+[See content details here](https://github.com/AnnieQian1212/COMPSCI-687-final-project/tree/main/REINFORCE_with_baseline)
 
 # One-Step Actor-Critic Implementation
 
