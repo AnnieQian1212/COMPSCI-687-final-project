@@ -4,7 +4,7 @@ from concurrent.futures import ProcessPoolExecutor
 import multiprocessing as mp
 import os
 import numpy as np
-from black_algo import *
+from taxi_algo import *
 import random
 import math
 import matplotlib.pyplot as plt
@@ -35,10 +35,10 @@ class Parallelize:
                     
 if __name__ == '__main__':
 
-    a = [0.0001,0.0001,0.001,0.01,0.1]
-    a_w = [0.0001,0.001,0.01,0.1]
-    gamma = [1,0.99]
-    policy_neurons_per_layer = [(16, 16), (32, 16), (32, 32)]
+    a = [0.00001,]
+    a_w = [0.00001,]
+    gamma = [0.95]
+    policy_neurons_per_layer = [(32, 32)]
     value_neurons_per_layer = [(16, 16), (32, 16), (32, 32),(16,16,16)]
 
     # a = [0.00005]
