@@ -104,7 +104,7 @@
     \end{Large}
     \\
     \vspace{0.15cm}
-    Aichen Qian, Linfeng Lyu, Wanqi Wang
+    Aichen Qian, Linfeng Lyu, Wanqi Li
 \end{center}
 \addcontentsline{toc}{subsection}{\textbf{Homework 5}}
 
@@ -200,9 +200,159 @@ to make sure it is appropriate for this course project.
 
 \section{REINFORCE with Baseline algorithm}
 \subsection{Brief Description}
+REINFORCE is a Monte Carlo policy gradient algorithm that optimizes parameterized policies to maximize expected total return. 
+The agent interacts with the environment in episodes, collecting trajectories of states, actions, and rewards. 
+After each episode, the agent updates its policy parameters based on the observed returns using gradient ascent.
+$$\bm{\theta}_{t+1} = \bm{\theta}_t + \alpha G_t \frac{\nabla \pi(A_t|S_t, \bm{\theta}_t)}{\pi(A_t|S_t, \bm{\theta}_t)}$$
+where $G_t$ is the return following time step $t$, $\alpha$ is the learning rate, and $\pi(a|s,\bm{\theta})$ is the policy parameterized by $\bm{\theta}$.
+\\
+\\
+The REINFORCE with Baseline algorithm introduces a baseline function to the REINFORCE algorithm so that the equation becomes:
+$$\bm{\theta}_{t+1} = \bm{\theta}_t + \alpha (G_t - b(S_t)) \frac{\nabla \pi(A_t|S_t, \bm{\theta}_t)}{\pi(A_t|S_t, \bm{\theta}_t)}$$
+where $b(S_t)$ is the baseline function that depends only on the state $S_t$.
+The baseline function can be an function as long as it does not depend on the action and varies with states for MDPs. 
+One natural choice is for baseline to be an estimate of the state-value function $\hat{v}(S_t, \bm{w})$ where $\bm{w}$ is the state-value weights that can be learned using Monte Carlo methods:
+$$\bm{w}_{t+1} = \bm{w}_t + \alpha^{\bm{w}} (G_t - \hat{v}(S_t, \bm{w}_t)) \nabla \hat{v}(S_t, \bm{w}_t)$$
+
 \subsection{Pseudocode}
+
+
+\begin{tcolorbox}[arc=0mm,width=(\linewidth - 0.2cm)] 
+	\begin{tabbing}
+		{\sc \underline{REINFORCE with Baseline}}\\
+    \textbf{Input:} Differentiable policy parameterization $\pi(a | s,\bm{\theta})$ \\
+    \textbf{Input:} Differentiable state-value function $\hat v(s,\bm{w})$ \\
+    \textbf{Parameters:} Step sizes $\alpha > 0$, $\alpha^{\bm{w}} > 0$ \\
+        \textbf{Initialize:} Policy parameter $\bm{\theta} \in \mathbb{R}^{d'}$ (e.g., $0$) \\
+        \textbf{Initialize:} Value weights $\bm{w} \in \mathbb{R}^d$ (e.g., $0$) \\
+        \textbf{Loop:} forever \textit{(for each episode)} \\
+        \hspace{0.5cm} Generate an episode: $S_0, A_0, R_1, S_1, A_1, R_2, \dots, S_{T-1}, A_{T-1}, R_T$ \\
+        \hspace{0.5cm} \textbf{For} $t = 0, 1, \dots, T-1$ \textbf{do} \\
+        \hspace{1.0cm} $G \gets R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots + \gamma^{T-t-1} R_T$ \\
+        \hspace{1.0cm} $\delta \gets G - \hat v(S_t,\bm{w})$ \\
+        \hspace{1.0cm} $\bm{w} \gets \bm{w} + \alpha^{\bm{w}} \delta \nabla_{\bm{w}} \hat v(S_t,\bm{w})$ \\
+        \hspace{1.0cm} $\bm{\theta} \gets \bm{\theta} + \alpha \gamma^t \delta \nabla_{\bm{\theta}} \ln \pi(A_t | S_t,\bm{\theta})$ \\
+        \hspace{0.5cm} \textbf{end for} \\
+        \textbf{end loop} \\
+    
+	\end{tabbing}
+\end{tcolorbox}
 \subsection{Hyperparameter Tuning}
+For the REINFORCE with Baseline algorithm, we tuned the following hyperparameters:
+\begin{itemize}
+    \item Step size $\alpha$: We experimented with values in the range [0.00001, 0.1].
+    \item Step size $\alpha^{\bm{w}}$: Similar to $\alpha$, we tested values in the range [0.00001, 0.1].
+    \item Discount factor $\gamma$: We evaluated values between 1 and 0.90 to experiment with different rate of learning.
+    \item Policy Network Architecture: We tested different architectures including single-layer and multi-layer neural networks with varying numbers of neurons mainly from 4 to 128. 
+    \item Value Function Network Architecture: Similar to the policy network, we experimented with different architectures.
+\end{itemize}
+We performed the grid search process for searching the optimal hyperparameters on each of the four environments: CartPole, Blackjack, FrozenLake, and Taxi. 
+For each environment, we evaluated the performance of the algorithm under different hyperparameter configurations by measuring the average return over 100 episodes.
+%With certain environments, there are parameters that we explored further than the bound we metioned
+
+
 \subsection{Experimental Results}
+The goal for all experiments is to maximize the final average return over 100 episodes.
+\subsubsection{Cart Pole}
+For Cart Pole environment, the set of hyperparameters that achieved getting reward of 500 after 2000 episode is when
+$\alpha = 0.01$, $\alpha^{\bm{w}} = 0.001$, $\gamma \geq 0.97$ with two layers in both policy and value networks that has at least 32 neurons.
+One of the best result we got is shown in Figure \ref{CartPoleBest}. 
+This result also indicated the unstabling leanring process that happened frequently during our experiments.
+But with this set of hyperparameters, the agent is able to relearn quickly after a huge drop in performance.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/CartPole_a0.01_aw0.001_g0.97_p(64, 32)_v(32, 16).png}
+    \caption{Learning curve for best result in CartPole environment.}
+    \label{CartPoleBest}
+\end{figure}
+
+One interesting result we found is that if $\alpha$ and $\alpha^{\bm{w}}$ are drasticly differnt from each other, there will be meaningful learning, example in Figure \ref{CartDifferentAlpha}.
+However, if the policy network expends or value network to three layers, then there exist a sudden jump in the learning process, shown in Figure \ref{CartJumpLearning}. 
+In this case, the learning happens around 1250 episode. 
+We found that increase the learning rate will bring the jump ealier.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/CartPole_a0.01_aw0.0001_g0.97_p(32, 16)_v(16, 32).png}
+    \caption{Learning curve for drastically different $\alpha$ and $\alpha^{\bm{w}}$ in CartPole.}
+    \label{CartDifferentAlpha}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/CartPole_a0.01_aw0.0001_g0.97_p(16, 16, 16)_v(16, 32).png}
+    \caption{Learning curve for three-layer policy network in CartPole.}
+    \label{CartJumpLearning}
+\end{figure}
+
+\subsubsection{Blackjack}
+For Blackjack environment, we did not found any set of hyperparameters than can acchinve a stable reward.
+The average rewards oscillated between certain bounds.
+However we did found that with larger step sizes for $\alpha$ and $\alpha^{\bm{w}}$, the agent is able to get a slightly higher average reward.
+See Figure \ref{BlackHigh} and Figure \ref{BlackLow} for comparison.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/Blackjack_a0.1_aw0.1_g0.99_p(16, 16)_v(16, 16, 16).png}
+    \caption{Learning curve for large step sizes in Blackjack.}
+    \label{BlackHigh}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/Blackjack_a0.001_aw0.001_g0.99_p(16, 16)_v(16, 16, 16).png}
+    \caption{Learning curve for small step sizes in Blackjack.}
+    \label{BlackLow}
+\end{figure}
+The reason we think that this oscillation happens is because of the stochastic nature of the environment.
+As a poker game environment, the agent has to deal the the randomness of card dealing which makes the learning process difficcult and unstable.
+\subsubsection{Frozen Lake}
+For Frozen Lake environment, we found that with step sizes in the range of 0.1 to 0.01 for $\alpha$ and $\alpha^{\bm{w}}$, the agent is able to learn a stable policy that converge to reward of 1 consistently.
+An example learning curve is shown in Figure \ref{FrozenSmall}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/Lake_a0.1_aw0.01_g0.95_p(4,)_v(4,).png}
+    \caption{Learning curve for best result in FrozenLake environment.}
+    \label{FrozenSmall}
+\end{figure}
+We found that network architecture of one layer with 4 neurons is sufficient for both policy and value networks, shown in Figure \ref{FrozenBig}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/Lake_a0.1_aw0.01_g0.95_p(32,)_v(32,).png}
+    \caption{Learning curve for best result in FrozenLake environment.}
+    \label{FrozenBig}
+\end{figure}
+We also found that adding a layer to the value network and speed up the learning process, shown in Figure \ref{FrozenFaster}.   
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/Lake_a0.1_aw0.01_g0.95_p(32,)_v(32, 16).png}
+    \caption{Learning curve for best result in FrozenLake environment.}
+    \label{FrozenFaster}
+\end{figure}
+
+\subsubsection{Taxi}
+For the Taxi environment, we found that the maximum average reward the agent would achieve is -200.
+This means that the agent learned to randomly walk around the map without successfully picking up and dropping off the passenger.
+This is not the most desired behavior, but we think it is due to the complexity of the environment and the limited capacity of our policy and value networks.
+The agent found the a local optimum that maximizes its reward without actually completing the task.
+An example learning curve is shown in Figure \ref{TaxiBest}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/Taxi_a0.01_aw0.01_g0.95_p(16, 16, 16)_v(32, 16).png}
+    \caption{Learning curve for best result in Taxi environment.}
+    \label{TaxiBest}
+\end{figure}
+We thought this could be improved by decrease policy step size and increase network capacity, but the results did not show significant improvement, shown in Figure \ref{TaxiNotWorking}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/Taxi_a0.005_aw0.05_g0.95_p(128, 64)_v(128, 64).png}
+    \caption{Learning curve for Taxi environment with larger networks and step sizes.\\(The graph title was misslabeled, but it is for Taxi environment.)}
+    \label{TaxiNotWorking}
+\end{figure}
+We also tried other combinations of hyperparameters, but the results were very slow to converge so we determined that is not suitable for this environment. 
+One example is shown in Figure \ref{TaxiSlow}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/Taxi_a1e-05_aw5e-05_g0.95_p(64,)_v(64, 128).png}
+    \caption{Learning curve for Taxi environment with smaller step sizes.}
+    \label{TaxiSlow}
+\end{figure}
 
 \section{One-Step Actor-Critic algorithm (performed by Aichen Qian)}
 \subsection{Brief Description}
