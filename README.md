@@ -23,6 +23,7 @@ pip install -r requirements.txt
 - **Taxi**: Pick up and drop off passengers
 
 # REINFORCE with baseline
+Implementation the REINFORCE with baseline algorithm for episodic tasks in multiple OpenAI Gym environments.
 
 
 ## Usage
