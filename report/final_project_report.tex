@@ -252,7 +252,7 @@ For each environment, we evaluated the performance of the algorithm under differ
 
 
 \subsection{Experimental Results}
-The goal for all experiments is to maximize the final average return over 100 episodes.
+The goal for all experiments is to maximize and converge the final average return over 100 episodes.
 \subsubsection{Cart Pole}
 For Cart Pole environment, the set of hyperparameters that achieved getting reward of 500 after 2000 episode is when
 $\alpha = 0.01$, $\alpha^{\bm{w}} = 0.001$, $\gamma \geq 0.97$ with two layers in both policy and value networks that has at least 32 neurons.
@@ -266,7 +266,7 @@ But with this set of hyperparameters, the agent is able to relearn quickly after
     \label{CartPoleBest}
 \end{figure}
 
-One interesting result we found is that if $\alpha$ and $\alpha^{\bm{w}}$ are drasticly differnt from each other, there will be meaningful learning, example in Figure \ref{CartDifferentAlpha}.
+One interesting result we found is that if $\alpha$ and $\alpha^{\bm{w}}$ are drasticly differnt from each other, the agent won't learn anything meaningful, example in Figure \ref{CartDifferentAlpha}.
 However, if the policy network expends or value network to three layers, then there exist a sudden jump in the learning process, shown in Figure \ref{CartJumpLearning}. 
 In this case, the learning happens around 1250 episode. 
 We found that increase the learning rate will bring the jump ealier.
@@ -311,18 +311,21 @@ An example learning curve is shown in Figure \ref{FrozenSmall}.
     \caption{Learning curve for best result in FrozenLake environment.}
     \label{FrozenSmall}
 \end{figure}
-We found that network architecture of one layer with 4 neurons is sufficient for both policy and value networks, shown in Figure \ref{FrozenBig}.
+We found that network architecture of one layer with 4 neurons is sufficient for both policy and value networks. 
+As shown in Figure \ref{FrozenBig} increase neron size to 32 did not improve performance if not causing the learning to take place later.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{report_fig/Lake_a0.1_aw0.01_g0.95_p(32,)_v(32,).png}
-    \caption{Learning curve for best result in FrozenLake environment.}
+    \caption{Learning curve for more neurons in FrozenLake environment.}
     \label{FrozenBig}
 \end{figure}
-We also found that adding a layer to the value network and speed up the learning process, shown in Figure \ref{FrozenFaster}.   
+We found that adding a layer to the value network and speed up the learning process. 
+Figure \ref{FrozenFaster} has the same neuron size as Figure \ref{FrozenBig} but with an additional layer in the value network.
+The learning happens around 400 episode instead of 1000.   
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{report_fig/Lake_a0.1_aw0.01_g0.95_p(32,)_v(32, 16).png}
-    \caption{Learning curve for best result in FrozenLake environment.}
+    \caption{Learning curve for more layers and more neurons in FrozenLake environment.}
     \label{FrozenFaster}
 \end{figure}
 
@@ -335,14 +338,14 @@ An example learning curve is shown in Figure \ref{TaxiBest}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{report_fig/Taxi_a0.01_aw0.01_g0.95_p(16, 16, 16)_v(32, 16).png}
-    \caption{Learning curve for best result in Taxi environment.}
+    \caption{Learning curve for best result in Taxi environment. (Graph title misslabeled as FrozenLake, but it is for Taxi environment.)}
     \label{TaxiBest}
 \end{figure}
 We thought this could be improved by decrease policy step size and increase network capacity, but the results did not show significant improvement, shown in Figure \ref{TaxiNotWorking}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{report_fig/Taxi_a0.005_aw0.05_g0.95_p(128, 64)_v(128, 64).png}
-    \caption{Learning curve for Taxi environment with larger networks and step sizes.\\(The graph title was misslabeled, but it is for Taxi environment.)}
+    \caption{Learning curve for Taxi environment with larger networks and smaller step sizes.}
     \label{TaxiNotWorking}
 \end{figure}
 We also tried other combinations of hyperparameters, but the results were very slow to converge so we determined that is not suitable for this environment. 
@@ -350,7 +353,7 @@ One example is shown in Figure \ref{TaxiSlow}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{report_fig/Taxi_a1e-05_aw5e-05_g0.95_p(64,)_v(64, 128).png}
-    \caption{Learning curve for Taxi environment with smaller step sizes.}
+    \caption{Learning curve for Taxi environment with different hyperparameters.}
     \label{TaxiSlow}
 \end{figure}
 
