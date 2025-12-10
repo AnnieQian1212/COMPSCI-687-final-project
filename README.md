@@ -23,6 +23,21 @@ pip install -r requirements.txt
 - **Taxi**: Pick up and drop off passengers
 
 # REINFORCE with baseline
+
+
+## Usage
+```bash
+cd REINFORCE_with_baseline
+python parallel.py
+```
+
+## Hyperparameters
+- `alpha`: Policy step size
+- `alpha_w`: Value function step size  
+- `gamma`: Discount factor
+- `policy_neurons_per_layer`: policy network architecture
+- `value_neurons_per_layer`: value function network architecture
+
 [See content details here](https://github.com/AnnieQian1212/COMPSCI-687-final-project/tree/main/REINFORCE_with_baseline)
 
 # One-Step Actor-Critic Implementation
