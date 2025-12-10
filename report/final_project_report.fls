@@ -422,6 +422,62 @@ INPUT .\report_fig\CartPole_a0.01_aw0.0001_g0.97_p(16, 16, 16)_v(16, 32).png
 INPUT .\report_fig\CartPole_a0.01_aw0.0001_g0.97_p(16, 16, 16)_v(16, 32).png
 INPUT .\report_fig\CartPole_a0.01_aw0.0001_g0.97_p(16, 16, 16)_v(16, 32).png
 INPUT .\report_fig\CartPole_a0.01_aw0.0001_g0.97_p(16, 16, 16)_v(16, 32).png
+INPUT .\report_fig\Blackjack_a0.1_aw0.1_g0.99_p(16, 16)_v(16, 16, 16).png
+INPUT .\report_fig\Blackjack_a0.1_aw0.1_g0.99_p(16, 16)_v(16, 16, 16).png
+INPUT .\report_fig\Blackjack_a0.1_aw0.1_g0.99_p(16, 16)_v(16, 16, 16).png
+INPUT .\report_fig\Blackjack_a0.1_aw0.1_g0.99_p(16, 16)_v(16, 16, 16).png
+INPUT .\report_fig\Blackjack_a0.1_aw0.1_g0.99_p(16, 16)_v(16, 16, 16).png
+INPUT .\report_fig\Blackjack_a0.1_aw0.1_g0.99_p(16, 16)_v(16, 16, 16).png
+INPUT .\report_fig\Blackjack_a0.1_aw0.1_g0.99_p(16, 16)_v(16, 16, 16).png
+INPUT .\report_fig\Blackjack_a0.001_aw0.001_g0.99_p(16, 16)_v(16, 16, 16).png
+INPUT .\report_fig\Blackjack_a0.001_aw0.001_g0.99_p(16, 16)_v(16, 16, 16).png
+INPUT .\report_fig\Blackjack_a0.001_aw0.001_g0.99_p(16, 16)_v(16, 16, 16).png
+INPUT .\report_fig\Blackjack_a0.001_aw0.001_g0.99_p(16, 16)_v(16, 16, 16).png
+INPUT .\report_fig\Blackjack_a0.001_aw0.001_g0.99_p(16, 16)_v(16, 16, 16).png
+INPUT .\report_fig\Blackjack_a0.001_aw0.001_g0.99_p(16, 16)_v(16, 16, 16).png
+INPUT .\report_fig\Blackjack_a0.001_aw0.001_g0.99_p(16, 16)_v(16, 16, 16).png
+INPUT .\report_fig\Lake_a0.1_aw0.01_g0.95_p(4,)_v(4,).png
+INPUT .\report_fig\Lake_a0.1_aw0.01_g0.95_p(4,)_v(4,).png
+INPUT .\report_fig\Lake_a0.1_aw0.01_g0.95_p(4,)_v(4,).png
+INPUT .\report_fig\Lake_a0.1_aw0.01_g0.95_p(4,)_v(4,).png
+INPUT .\report_fig\Lake_a0.1_aw0.01_g0.95_p(4,)_v(4,).png
+INPUT .\report_fig\Lake_a0.1_aw0.01_g0.95_p(4,)_v(4,).png
+INPUT .\report_fig\Lake_a0.1_aw0.01_g0.95_p(4,)_v(4,).png
+INPUT .\report_fig\Lake_a0.1_aw0.01_g0.95_p(32,)_v(32,).png
+INPUT .\report_fig\Lake_a0.1_aw0.01_g0.95_p(32,)_v(32,).png
+INPUT .\report_fig\Lake_a0.1_aw0.01_g0.95_p(32,)_v(32,).png
+INPUT .\report_fig\Lake_a0.1_aw0.01_g0.95_p(32,)_v(32,).png
+INPUT .\report_fig\Lake_a0.1_aw0.01_g0.95_p(32,)_v(32,).png
+INPUT .\report_fig\Lake_a0.1_aw0.01_g0.95_p(32,)_v(32,).png
+INPUT .\report_fig\Lake_a0.1_aw0.01_g0.95_p(32,)_v(32,).png
+INPUT .\report_fig\Lake_a0.1_aw0.01_g0.95_p(32,)_v(32, 16).png
+INPUT .\report_fig\Lake_a0.1_aw0.01_g0.95_p(32,)_v(32, 16).png
+INPUT .\report_fig\Lake_a0.1_aw0.01_g0.95_p(32,)_v(32, 16).png
+INPUT .\report_fig\Lake_a0.1_aw0.01_g0.95_p(32,)_v(32, 16).png
+INPUT .\report_fig\Lake_a0.1_aw0.01_g0.95_p(32,)_v(32, 16).png
+INPUT .\report_fig\Lake_a0.1_aw0.01_g0.95_p(32,)_v(32, 16).png
+INPUT .\report_fig\Lake_a0.1_aw0.01_g0.95_p(32,)_v(32, 16).png
+INPUT .\report_fig\Taxi_a0.01_aw0.01_g0.95_p(16, 16, 16)_v(32, 16).png
+INPUT .\report_fig\Taxi_a0.01_aw0.01_g0.95_p(16, 16, 16)_v(32, 16).png
+INPUT .\report_fig\Taxi_a0.01_aw0.01_g0.95_p(16, 16, 16)_v(32, 16).png
+INPUT .\report_fig\Taxi_a0.01_aw0.01_g0.95_p(16, 16, 16)_v(32, 16).png
+INPUT .\report_fig\Taxi_a0.01_aw0.01_g0.95_p(16, 16, 16)_v(32, 16).png
+INPUT .\report_fig\Taxi_a0.01_aw0.01_g0.95_p(16, 16, 16)_v(32, 16).png
+INPUT .\report_fig\Taxi_a0.01_aw0.01_g0.95_p(16, 16, 16)_v(32, 16).png
+INPUT .\report_fig\Taxi_a0.005_aw0.05_g0.95_p(128, 64)_v(128, 64).png
+INPUT .\report_fig\Taxi_a0.005_aw0.05_g0.95_p(128, 64)_v(128, 64).png
+INPUT .\report_fig\Taxi_a0.005_aw0.05_g0.95_p(128, 64)_v(128, 64).png
+INPUT .\report_fig\Taxi_a0.005_aw0.05_g0.95_p(128, 64)_v(128, 64).png
+INPUT .\report_fig\Taxi_a0.005_aw0.05_g0.95_p(128, 64)_v(128, 64).png
+INPUT .\report_fig\Taxi_a0.005_aw0.05_g0.95_p(128, 64)_v(128, 64).png
+INPUT .\report_fig\Taxi_a0.005_aw0.05_g0.95_p(128, 64)_v(128, 64).png
+INPUT .\report_fig\Taxi_a1e-05_aw5e-05_g0.95_p(64,)_v(64, 128).png
+INPUT .\report_fig\Taxi_a1e-05_aw5e-05_g0.95_p(64,)_v(64, 128).png
+INPUT .\report_fig\Taxi_a1e-05_aw5e-05_g0.95_p(64,)_v(64, 128).png
+INPUT .\report_fig\Taxi_a1e-05_aw5e-05_g0.95_p(64,)_v(64, 128).png
+INPUT .\report_fig\Taxi_a1e-05_aw5e-05_g0.95_p(64,)_v(64, 128).png
+INPUT .\report_fig\Taxi_a1e-05_aw5e-05_g0.95_p(64,)_v(64, 128).png
+INPUT .\report_fig\Taxi_a1e-05_aw5e-05_g0.95_p(64,)_v(64, 128).png
 INPUT .\report_fig\cart_pole.png
 INPUT .\report_fig\cart_pole.png
 INPUT .\report_fig\cart_pole.png

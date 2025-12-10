@@ -284,8 +284,75 @@ We found that increase the learning rate will bring the jump ealier.
 \end{figure}
 
 \subsubsection{Blackjack}
+For Blackjack environment, we did not found any set of hyperparameters than can acchinve a stable reward.
+The average rewards oscillated between certain bounds.
+However we did found that with larger step sizes for $\alpha$ and $\alpha^{\bm{w}}$, the agent is able to get a slightly higher average reward.
+See Figure \ref{BlackHigh} and Figure \ref{BlackLow} for comparison.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/Blackjack_a0.1_aw0.1_g0.99_p(16, 16)_v(16, 16, 16).png}
+    \caption{Learning curve for large step sizes in Blackjack.}
+    \label{BlackHigh}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/Blackjack_a0.001_aw0.001_g0.99_p(16, 16)_v(16, 16, 16).png}
+    \caption{Learning curve for small step sizes in Blackjack.}
+    \label{BlackLow}
+\end{figure}
+The reason we think that this oscillation happens is because of the stochastic nature of the environment.
+As a poker game environment, the agent has to deal the the randomness of card dealing which makes the learning process difficcult and unstable.
 \subsubsection{Frozen Lake}
+For Frozen Lake environment, we found that with step sizes in the range of 0.1 to 0.01 for $\alpha$ and $\alpha^{\bm{w}}$, the agent is able to learn a stable policy that converge to reward of 1 consistently.
+An example learning curve is shown in Figure \ref{FrozenSmall}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/Lake_a0.1_aw0.01_g0.95_p(4,)_v(4,).png}
+    \caption{Learning curve for best result in FrozenLake environment.}
+    \label{FrozenSmall}
+\end{figure}
+We found that network architecture of one layer with 4 neurons is sufficient for both policy and value networks, shown in Figure \ref{FrozenBig}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/Lake_a0.1_aw0.01_g0.95_p(32,)_v(32,).png}
+    \caption{Learning curve for best result in FrozenLake environment.}
+    \label{FrozenBig}
+\end{figure}
+We also found that adding a layer to the value network and speed up the learning process, shown in Figure \ref{FrozenFaster}.   
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/Lake_a0.1_aw0.01_g0.95_p(32,)_v(32, 16).png}
+    \caption{Learning curve for best result in FrozenLake environment.}
+    \label{FrozenFaster}
+\end{figure}
+
 \subsubsection{Taxi}
+For the Taxi environment, we found that the maximum average reward the agent would achieve is -200.
+This means that the agent learned to randomly walk around the map without successfully picking up and dropping off the passenger.
+This is not the most desired behavior, but we think it is due to the complexity of the environment and the limited capacity of our policy and value networks.
+The agent found the a local optimum that maximizes its reward without actually completing the task.
+An example learning curve is shown in Figure \ref{TaxiBest}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/Taxi_a0.01_aw0.01_g0.95_p(16, 16, 16)_v(32, 16).png}
+    \caption{Learning curve for best result in Taxi environment.}
+    \label{TaxiBest}
+\end{figure}
+We thought this could be improved by decrease policy step size and increase network capacity, but the results did not show significant improvement, shown in Figure \ref{TaxiNotWorking}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/Taxi_a0.005_aw0.05_g0.95_p(128, 64)_v(128, 64).png}
+    \caption{Learning curve for Taxi environment with larger networks and step sizes.\\(The graph title was misslabeled, but it is for Taxi environment.)}
+    \label{TaxiNotWorking}
+\end{figure}
+We also tried other combinations of hyperparameters, but the results were very slow to converge so we determined that is not suitable for this environment. 
+One example is shown in Figure \ref{TaxiSlow}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{report_fig/Taxi_a1e-05_aw5e-05_g0.95_p(64,)_v(64, 128).png}
+    \caption{Learning curve for Taxi environment with smaller step sizes.}
+    \label{TaxiSlow}
+\end{figure}
 
 \section{One-Step Actor-Critic algorithm}
 \subsection{Brief Description}
