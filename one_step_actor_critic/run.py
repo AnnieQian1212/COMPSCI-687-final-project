@@ -54,16 +54,6 @@ def plot_results(results_dict, window=100):
         ax1.set_title(f'{name} - Reward (Final: {np.mean(rewards[-100:]):.2f})')
         ax1.grid(True, alpha=0.3)
         
-        # Value Loss (log scale)
-        # ax2 = axes[1, i]
-        # ma = np.convolve(value_losses, np.ones(w)/w, mode='valid')
-        # ax2.plot(ma, color='red')
-        # ax2.set_xlabel('Episode')
-        # ax2.set_ylabel('Value Loss')
-        # ax2.set_title(f'{name} - Value Loss (log scale)')
-        # ax2.set_yscale('log')  # Use log scale
-        # ax2.grid(True, alpha=0.3)
-        
         # TD Error
         ax3 = axes[1, i]
         ma = np.convolve(td_errors, np.ones(w)/w, mode='valid')
@@ -80,7 +70,6 @@ def plot_results(results_dict, window=100):
     print("Figure saved to results.png")
 
 
-# Environment configurations with appropriate features
 ENV_CONFIGS = {
     'blackjack': {
         'num_episodes': 10000,
@@ -98,42 +87,6 @@ ENV_CONFIGS = {
         'feature_type': 'poly',
         'order': 2
     },
-    'mountaincar': {
-        'num_episodes': 5000,
-        'alpha_theta': 0.01,
-        'alpha_w': 0.1,
-        'gamma': 0.99,
-        'feature_type': 'tile',
-        'num_tilings': 10,
-        'num_tiles': 8
-    },
-    'acrobot': {
-        'num_episodes': 10000,
-        'alpha_theta': 0.05,
-        'alpha_w': 0.2,
-        'gamma': 0.99,
-        'feature_type': 'tile',
-        'num_tilings': 12,
-        'num_tiles': 6
-    },
-    'lunarlander': {
-        'num_episodes': 5000,
-        'alpha_theta': 0.005,
-        'alpha_w': 0.05,
-        'gamma': 0.99,
-        'feature_type': 'rbf',
-        'centers_per_dim': 5,
-        'sigma': 0.3
-    },
-    'cliffwalking': {
-        'num_episodes': 3000,
-        'alpha_theta': 0.01,
-        'alpha_w': 0.05,
-        'gamma': 0.99,
-        'feature_type': 'tile',
-        'num_tilings': 4,
-        'num_tiles': 4
-    },
     'frozenlake': {
         'num_episodes': 10000,
         'alpha_theta': 0.01,
@@ -145,20 +98,22 @@ ENV_CONFIGS = {
     },
     'taxi': {
         'num_episodes': 1000,
-        'alpha_theta': 0.01,
-        'alpha_w': 0.05,  
-        'gamma': 0.99,
-        'feature_type': 'tile',  
-        'num_tilings': 8,
-        'num_tiles': 4
+        'alpha_theta': 0.1,
+        'alpha_w': 0.005,
+        'gamma': 1,
+        'feature_type': 'tabular', 
+        'num_states': 500          
     },
 }
 
 
 if __name__ == '__main__':
     # Select environments to run
-    # envs_to_run = ['cartpole', 'mountaincar', 'acrobot', 'blackjack', 'frozenlake', 'taxi']
-    envs_to_run = ['cartpole', 'blackjack', 'frozenlake', 'taxi']
+    # envs_to_run = ['cartpole', 'blackjack', 'frozenlake', 'taxi']
+    envs_to_run = ['taxi']
+    # envs_to_run = ['cartpole']
+    # envs_to_run = ['blackjack']
+    # envs_to_run = ['frozenlake']
     
     results = {}
     for env_name in envs_to_run:

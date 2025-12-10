@@ -18,3 +18,4 @@ python-dateutil==2.9.0.post0
 six==1.17.0
 swig==4.4.0
 typing_extensions==4.15.0
+tqdm>=4.65.0
