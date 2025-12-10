@@ -42,7 +42,7 @@ python parallel.py
 
 # One-Step Actor-Critic Implementation
 
-Implementation of the REINFORCE with Baseline algorithm, the One-Step Actor-Critic algorithm for episodic tasks and the Monte Carlo Tree Search (MCTS) algorithm in multiple OpenAI Gym environments.
+Implementation the One-Step Actor-Critic algorithm for episodic tasks in multiple OpenAI Gym environments.
 
 
 
