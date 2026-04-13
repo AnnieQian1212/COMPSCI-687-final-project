@@ -3,7 +3,6 @@ This project implents three reinforcement learning algorithms: REINFORCE with Ba
 # Setup
 
 
-
 ## 1. Create virtual environment
 ```bash
 conda create -n actor-critic python=3.10
